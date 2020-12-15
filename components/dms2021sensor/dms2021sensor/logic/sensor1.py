@@ -1,5 +1,5 @@
 
-from sensorAbs import Sensor
+from .sensorAbs import Sensor
 import commands
 
 class SensorMem(Sensor):
