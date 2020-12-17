@@ -5,9 +5,10 @@ import logging
 from flask import Flask, request
 from flask.logging import default_handler
 
+from dms2021sensor.data.config import SensorConfiguration
 from dms2021core.data.rest import RestResponse
 from dms2021sensor.presentation.rest import sensorService
-from dms2021sensor.data.config import sensorConfiguration
+
 
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ root_logger = logging.getLogger()
 root_logger.addHandler(default_handler)
 sensor_rest_api: sensorService = sensorService()
 
-cfg: sensorConfiguration = sensorConfiguration()
+cfg: SensorConfiguration = SensorConfiguration()
 cfg.load_from_file(cfg.default_config_file())
 
 @app.route('/', methods=['GET'])

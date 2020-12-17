@@ -4,7 +4,7 @@
 from dms2021core.data.config import Configuration
 
 
-class sensorConfiguration(Configuration):
+class SensorConfiguration(Configuration):
     """ Class responsible of storing a specific authentication service configuration.
     """
 
