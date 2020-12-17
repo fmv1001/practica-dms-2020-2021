@@ -1,5 +1,5 @@
 from dms2021sensor.logic.sensor1 import SensorMem
-from dms2021auth.logic import UserManager
+#from dms2021auth.logic import UserManager
 from dms2021core.data.rest import RestResponse
 
 class sensorService():

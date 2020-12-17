@@ -1,3 +1,3 @@
 """ Sensor REST API modules """
 
-from .sensorFile import SensorService
+from .sensorFile import sensorService

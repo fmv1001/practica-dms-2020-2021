@@ -8,10 +8,10 @@ class SensorArchivoX(Sensor):
         self.__ruta = ruta
         self.__memoriaArchivo = 0
         self.__tipoMem = 'K'
-        self.__calcularMemoriaArchivo()
+        self.__monitorizar()
         return
 
-    def __calcularMemoriaArchivo(self):
+    def __monitorizar(self):
         try:
             memoria=subprocess.getoutput('du -sh ' + self.__ruta + ' | awk \' {print $1 }\'')
             memoria = str(memoria)
@@ -22,15 +22,15 @@ class SensorArchivoX(Sensor):
             print("No existe el archivo o ha ocurrido algun error")
         return
     
+    def obtenerSensor(self): # -> int
+        return self.__memoriaArchivo
+
     def obtenerRuta(self): # -> int
         return self.__ruta
 
-    def obtenerMemoriaArchivo(self): # -> int
-        return self.__ruta
-
-    def actualizarRura(self, ruta):
+    def actualizarSensor(self, ruta):
         self.__ruta = ruta
-        self.__calcularMemoriaArchivo()
+        self.__monitorizar()
         return
 
     def __str__(self):

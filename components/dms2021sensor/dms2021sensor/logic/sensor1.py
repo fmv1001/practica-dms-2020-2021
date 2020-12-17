@@ -12,14 +12,14 @@ class SensorMem(Sensor):
     def __monitorizar(self):
         result1 = subprocess.getoutput('grep MemTotal /proc/meminfo | awk \' {print $2 }\' ')
         result2 = subprocess.getoutput('grep MemAvailable /proc/meminfo | awk \' {print $2 }\' ')
-        memUsada = 100 - (int(result2)*100/int(result1))
-        self.__memUsada = memUsada
+        mem_usada = 100 - (int(result2)*100/int(result1))
+        self.__memUsada = mem_usada
         return
     
-    def obtenerMemUsada(self): # -> int
+    def obtenerSensor(self): # -> int
         return self.__memUsada
 
-    def actualizarMemUsadaSensor(self):
+    def actualizarSensor(self):
         self.__monitorizar()
         return
     
@@ -27,4 +27,4 @@ class SensorMem(Sensor):
         return SensorMem()
 
     def __str__(self):
-        return 'Memoria usada del sistema: ' + str(self.obtenerMemUsada()) + '%'
+        return 'Memoria usada del sistema: ' + str(self.obtenerSensor()) + '%'
