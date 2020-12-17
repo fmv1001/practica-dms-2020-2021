@@ -4,7 +4,7 @@ from dms2021core.data.rest import RestResponse
 
 class sensorService():
     def __init__(self):
-        pass
+        return
 
     def monitorizarSensor(self, sensor_type : int) -> RestResponse:
         try:
@@ -14,4 +14,4 @@ class sensorService():
         except ValueError:
             return RestResponse(code=400,mime_type='text/plain')
 
-        return RestResponse(mime_type='text/plain')
+        return RestResponse(sensor.obtenerSensor(), 200, mime_type='text/plain')
