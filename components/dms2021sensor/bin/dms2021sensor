@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import time
-#import logging
+import logging
 from flask import Flask, request
 from flask.logging import default_handler
 
@@ -31,7 +31,16 @@ def create_sensor():
     response: RestResponse = sensor_rest_api.monitorizarSensor(int(sensor_type))
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    if cfg.get_debug_flag():
+        app.logger.error(str(type(e)))
+        app.logger.error(e)
+    return ('', 500)
 
 if __name__ == '__main__':
-    while True:
-        time.sleep(1)
+    app.run(
+        host=cfg.get_service_host(),
+        port=cfg.get_service_port(),
+        debug=cfg.get_debug_flag()
+    )

@@ -1,5 +1,5 @@
-from sensorAbs import Sensor
-import commands
+from .sensorAbs import Sensor
+import subprocess
 
 class SensorSwap(Sensor):
 
@@ -9,8 +9,8 @@ class SensorSwap(Sensor):
         return
 
     def __calcularSwap(self):
-        SwapTotal=commands.getoutput('grep SwapTotal /proc/meminfo | awk \' {print $2 }\' ')
-        SwapFree=commands.getoutput('grep SwapFree /proc/meminfo | awk \' {print $2 }\' ')
+        SwapTotal=subprocess.getoutput('grep SwapTotal /proc/meminfo | awk \' {print $2 }\' ')
+        SwapFree=subprocess.getoutput('grep SwapFree /proc/meminfo | awk \' {print $2 }\' ')
         ##mem.ocupada=mem.total-mem.libre
         Swap=(int(SwapTotal) - int(SwapFree))*100/int(SwapTotal)
         self.__swap = Swap

@@ -1,6 +1,6 @@
 #
-from sensorAbs import Sensor
-import commands
+from .sensorAbs import Sensor
+import subprocess
 
 class SensorArchivoX(Sensor):
 
@@ -13,7 +13,7 @@ class SensorArchivoX(Sensor):
 
     def __calcularMemoriaArchivo(self):
         try:
-            memoria=commands.getoutput('du -sh ' + self.__ruta + ' | awk \' {print $1 }\'')
+            memoria=subprocess.getoutput('du -sh ' + self.__ruta + ' | awk \' {print $1 }\'')
             memoria = str(memoria)
             self.__tipoMem = memoria[-1]
             memoria = memoria[:-1]

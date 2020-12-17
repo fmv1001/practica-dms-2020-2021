@@ -1,6 +1,6 @@
 
 from .sensorAbs import Sensor
-import commands
+import subprocess
 
 class SensorMem(Sensor):
 
@@ -10,8 +10,8 @@ class SensorMem(Sensor):
         return
 
     def __monitorizar(self):
-        result1 = commands.getoutput('grep MemTotal /proc/meminfo | awk \' {print $2 }\' ')
-        result2 = commands.getoutput('grep MemAvailable /proc/meminfo | awk \' {print $2 }\' ')
+        result1 = subprocess.getoutput('grep MemTotal /proc/meminfo | awk \' {print $2 }\' ')
+        result2 = subprocess.getoutput('grep MemAvailable /proc/meminfo | awk \' {print $2 }\' ')
         memUsada = 100 - (int(result2)*100/int(result1))
         self.__memUsada = memUsada
         return
