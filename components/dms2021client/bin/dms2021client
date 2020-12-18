@@ -5,33 +5,44 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
+from dms2021client.presentation import menuOpciones, exitPagina
 
-cfg: ClientConfiguration = ClientConfiguration()
-cfg.load_from_file(cfg.default_config_file())
-auth_service: AuthService = AuthService(cfg.get_auth_service_host(), cfg.get_auth_service_port())
+__sesion_id: str
+__username: str
+__auth_service: AuthService
+__cfg: ClientConfiguration
 
-print("This file is a stub. Replace this behaviour with the actual service code.")
+def __init__(self):
+    print("¡¡BIENVENIDO!!")
+    print("El programa se está iniciando")
+    self.__cfg= ClientConfiguration()
+    self.__cfg.load_from_file(self.__cfg.default_config_file())
+    self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
+    self.__sesion_id, self.__username = self.login()
 
-while not auth_service.is_running():
-    time.sleep(1)
-print("\nAuthentication service up!")
+    while True:
+        respuesta = menuOpciones.menuOpciones()
 
-while True:
-    print("Press Ctrl+C to end this process.")
-    print("If run as a docker container, press Ctrl+P,Ctrl+Q to detach from the container.")
-    username: str = input('Username: ')
-    password: str = getpass('Password: ')
+        if respuesta == 0:
+            if(exitPagina(self.__sesion_id, self.__auth_service) == -1):
+                break
+
+def login(self):
+    while not self.__auth_service.is_running():
+        time.sleep(1)
+    print("\nAuthentication service up!")
+
+    print("LOGIN -->")
+    username: str = input('\tUsername: ')
+    password: str = getpass('\tPassword: ')
     try:
-        session_id: str = auth_service.login(username, password)
-        print('Logged in successfully as ' + username + ' . Session id: ' + session_id)
-        try:
-            auth_service.logout(session_id)
-            print('Logged out successfully.')
-        except UnauthorizedError:
-            print('Wrong session id.')
-        except Exception as ex:
-            print(ex)
+        self.__session_id: str = self.__auth_service.login(username, password)
+        self.__username = username
+        print('Logged in successfully as ' + username + ' . Session id: ' + self.__session_id)
     except InvalidCredentialsError:
         print('Wrong username and/or password. Try again.')
+        self.__sesion_id, self.__username = self.login()
     except Exception as ex:
         print(ex)
+    
+    return self.__session_id, self.__username
