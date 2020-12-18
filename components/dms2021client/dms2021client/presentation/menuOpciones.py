@@ -1,9 +1,9 @@
-class MenuOpciones():
+class menuDeOpciones():
 
     def __init__(self):
         return
 
-    def menuOpciones(self):
+    def menu(self):
         print("+-----------------------------------------------------------------------+")
         print("| MENU PRINCIPAL -->                                                    |")
         print("+-----------------------------------------------------------------------+")

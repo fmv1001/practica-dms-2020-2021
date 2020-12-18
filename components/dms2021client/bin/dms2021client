@@ -5,44 +5,50 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from dms2021client.presentation import menuOpciones, exitPagina
+from dms2021client.presentation.menuOpciones import menuDeOpciones
+from dms2021client.presentation.exitPagina import  Exit
 
-__sesion_id: str
-__username: str
-__auth_service: AuthService
-__cfg: ClientConfiguration
+class LanzadorCliente():
+    __sesion_id: str
+    __username: str
+    __auth_service: AuthService
+    __cfg: ClientConfiguration
 
-def __init__(self):
-    print("¡¡BIENVENIDO!!")
-    print("El programa se está iniciando")
-    self.__cfg= ClientConfiguration()
-    self.__cfg.load_from_file(self.__cfg.default_config_file())
-    self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-    self.__sesion_id, self.__username = self.login()
-
-    while True:
-        respuesta = menuOpciones.menuOpciones()
-
-        if respuesta == 0:
-            if(exitPagina(self.__sesion_id, self.__auth_service) == -1):
-                break
-
-def login(self):
-    while not self.__auth_service.is_running():
-        time.sleep(1)
-    print("\nAuthentication service up!")
-
-    print("LOGIN -->")
-    username: str = input('\tUsername: ')
-    password: str = getpass('\tPassword: ')
-    try:
-        self.__session_id: str = self.__auth_service.login(username, password)
-        self.__username = username
-        print('Logged in successfully as ' + username + ' . Session id: ' + self.__session_id)
-    except InvalidCredentialsError:
-        print('Wrong username and/or password. Try again.')
+    def __init__(self):
+        print("¡¡BIENVENIDO!!")
+        print("El programa se está iniciando")
+        self.__cfg= ClientConfiguration()
+        self.__cfg.load_from_file(self.__cfg.default_config_file())
+        self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
         self.__sesion_id, self.__username = self.login()
-    except Exception as ex:
-        print(ex)
-    
-    return self.__session_id, self.__username
+
+        while True:
+            salida_pantalla = menuDeOpciones()
+            respuesta = salida_pantalla.menu()
+
+            if respuesta == 0:
+                salir_programa = Exit(self.__sesion_id, self.__auth_service)
+                if(salir_programa.exitPagina() == -1):
+                    break
+
+    def login(self):
+        while not self.__auth_service.is_running():
+            time.sleep(1)
+        print("\nAuthentication service up!")
+
+        print("LOGIN -->")
+        username: str = input('\tUsername: ')
+        password: str = getpass('\tPassword: ')
+        try:
+            self.__session_id: str = self.__auth_service.login(username, password)
+            self.__username = username
+            print('Logged in successfully as ' + username + ' . Session id: ' + self.__session_id)
+        except InvalidCredentialsError:
+            print('Wrong username and/or password. Try again.')
+            self.__sesion_id, self.__username = self.login()
+        except Exception as ex:
+            print(ex)
+        
+        return self.__session_id, self.__username
+
+LanzadorCliente()
