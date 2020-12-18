@@ -101,3 +101,20 @@ class AuthService():
             raise UnauthorizedError()
         if response.status == 500:
             raise HTTPException('Server error')
+
+    def newUser(self,username: str, password: str, session_id: str):
+        form: str = urlencode({'username': username, 'password': password, 'session_id': session_id})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+
+        connection: HTTPConnection = self.__get_connection()
+        connection.request('POST', '/users',form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print("MUY BIEN SE HA CREADO!!!")
+        else:
+            print("VAYA POR DIOS....", response.status)
+
+
+        return
