@@ -10,7 +10,7 @@ class menuDeOpciones():
         print("|        1.Crear un usuario.                                            |")
         print("|        2.Cambiar permisos.                                            |")
         print("|        3.Obtener los resultados de un sensor.                         |")
-        print("|      0.SALIR...                                                       |")
+        print("|        0..SALIR...                                                     |")
         print("+-----------------------------------------------------------------------+")
         print("\n")
         

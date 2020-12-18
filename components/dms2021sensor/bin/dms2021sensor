@@ -9,8 +9,6 @@ from dms2021sensor.data.config.configuracionsensor import SensorConfiguration
 from dms2021core.data.rest import RestResponse
 from dms2021sensor.presentation.rest.sensorrest import RestSensor
 
-
-
 app = Flask(__name__)
 root_logger = logging.getLogger()
 root_logger.addHandler(default_handler)
@@ -23,7 +21,7 @@ cfg.load_from_file(cfg.default_config_file())
 def is_running():
     return ('', 200, {'Content-Type': 'text/plain'})
 
-@app.route('/sensorAbs', methods=['GET']) #/que?
+@app.route('/consultarSensor', methods=['GET']) #/que?
 def create_sensor():
     print("Escoja el tipo de sensor a consultar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
     print("[1] Sensor memoria RAM")
@@ -31,7 +29,7 @@ def create_sensor():
     print("[3] Sensor peso archivo")
     
     try:
-        sensor_type: str = request.form['tipo sensor:']
+        sensor_type: str = request.form['Tipo sensor:']
     except KeyError:
         sensor_type: str = '1'
     response: RestResponse = sensor_rest_api.monitorizarSensor(int(sensor_type))

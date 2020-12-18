@@ -83,10 +83,8 @@ class ClientConfiguration(Configuration):
         """
 
         return bool(self.get_value('debug'))
-
-#value, host configuration and port configuration of sensors.
     
-    def __get_sensor1_service_value(self) -> dict:
+    def __get_sensor_service_value(self) -> dict:
         """ Gets the value of the sensor_service configuration dictionary.
         ---
         Returns:
@@ -102,7 +100,7 @@ class ClientConfiguration(Configuration):
             )
         return sensor_service_value
 
-    def get_sensor1_service_host(self) -> str:
+    def get_sensor_service_host(self) -> str:
         """ Gets the sensor service host configuration value.
         ---
         Returns:
@@ -111,10 +109,10 @@ class ClientConfiguration(Configuration):
             - TypeError: if the sensor parameter is not a dictionary.
         """
 
-        sensor_service_value: dict = self.__get_sensor1_service_value()
+        sensor_service_value: dict = self.__get_sensor_service_value()
         return str(sensor_service_value['host'])
 
-    def get_sensor1_service_port(self) -> int:
+    def get_sensor_service_port(self) -> int:
         """ Gets the sensor service port configuration value.
         ---
         Returns:
@@ -123,45 +121,5 @@ class ClientConfiguration(Configuration):
             - TypeError: if the sensor parameter is not a dictionary.
         """
 
-        sensor_service_value: dict = self.__get_sensor1_service_value()
-        return int(str(sensor_service_value['port']))
-
-    def __get_sensor2_service_value(self) -> dict:
-        """ Gets the value of the sensor_service configuration dictionary.
-        ---
-        Returns:
-            A dictionary with the authentication service configured parameters.
-        """
-        sensor_service_value: ConfigurationValueType = self.get_value(
-            'sensor2'
-        )
-        if not isinstance(sensor_service_value, dict):
-            raise TypeError(
-                'Configuration parameter sensor_service is expected to be a dictionary. Received: '
-                + str(type(sensor_service_value))
-            )
-        return sensor_service_value
-
-    def get_sensor2_service_host(self) -> str:
-        """ Gets the sensor service host configuration value.
-        ---
-        Returns:
-            A string with the value of sensor host.
-        Throws:
-            - TypeError: if the sensor parameter is not a dictionary.
-        """
-
-        sensor_service_value: dict = self.__get_sensor2_service_value()
-        return str(sensor_service_value['host'])
-
-    def get_sensor2_service_port(self) -> int:
-        """ Gets the sensor service port configuration value.
-        ---
-        Returns:
-            An integer with the value of sensor port.
-        Throws:
-            - TypeError: if the sensor parameter is not a dictionary.
-        """
-
-        sensor_service_value: dict = self.__get_sensor2_service_value()
+        sensor_service_value: dict = self.__get_sensor_service_value()
         return int(str(sensor_service_value['port']))
