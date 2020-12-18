@@ -1,3 +1,3 @@
 """ Sensor configuration classes.
 """
-from .sensorconfiguration import SensorConfiguration
+from .configuracionsensor import SensorConfiguration
