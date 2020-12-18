@@ -21,18 +21,9 @@ cfg.load_from_file(cfg.default_config_file())
 def is_running():
     return ('', 200, {'Content-Type': 'text/plain'})
 
-@app.route('/consultarSensor', methods=['GET']) #/que?
-def create_sensor():
-    print("Escoja el tipo de sensor a consultar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
-    print("[1] Sensor memoria RAM")
-    print("[2] Sensor memoria Swap")
-    print("[3] Sensor peso archivo")
-    
-    try:
-        sensor_type: str = request.form['Tipo sensor:']
-    except KeyError:
-        sensor_type: str = '1'
-    response: RestResponse = sensor_rest_api.monitorizarSensor(int(sensor_type))
+@app.route('/consultarSensor/<int:tipo_sensor>', methods=['GET']) #/que?
+def create_sensor(tipo_sensor: int):
+    response: RestResponse = sensor_rest_api.monitorizarSensor(tipo_sensor)
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
 @app.errorhandler(Exception)

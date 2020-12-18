@@ -25,7 +25,7 @@ class SensorService():
         self.__port: int = port
 
     def __get_connection(self) -> HTTPConnection:
-        """ Creates a new connection to the authentication server.
+        """ Creates a new connection to the sensor server.
         ---
         Returns:
             The connection object.
