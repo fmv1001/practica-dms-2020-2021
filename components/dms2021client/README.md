@@ -28,3 +28,9 @@ The configuration file is a YAML dictionary with the following configurable para
 ## Running the service
 
 Just run `dms2021client` as any other program.
+
+## Funcionalidad
+
+Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las siguientes acciones mostradas en el menu:
+
+- `Crear usuarios`: Si el usuario con el que se ha hecho el login tiene el permiso `AdminUsers`, podra crear usuarios que seran anadidos al sistema. Este usuario se inicia sin permisos y es anadido en la base de datos del servicio de autentificacion. Las credenciales del nuevo usuario se pediran por pantalla.
