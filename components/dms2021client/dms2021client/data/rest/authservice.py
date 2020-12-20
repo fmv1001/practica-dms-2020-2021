@@ -112,9 +112,9 @@ class AuthService():
         connection.request('GET', '/users/' + usernameAdmin + '/rights/AdminUsers')
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
-            connection: HTTPConnection = self.__get_connection()
+            connection = self.__get_connection()
             connection.request('POST', '/users',form, headers)
-            response: HTTPResponse = connection.getresponse()
+            response = connection.getresponse()
             if response.status == 200:
                 print("\x1b[1;32m" + "¡¡¡MUY BIEN SE HA CREADO!!!" + "\033[0;m")
             else:
@@ -148,7 +148,7 @@ class AuthService():
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
             connection.request(dar_quitar, '/users/' + usernameChanges + '/rights/' + right_change, form, headers)
-            response: HTTPResponse = connection.getresponse()
+            response = connection.getresponse()
             if response.status == 200:
                 print("\x1b[1;32m" + "¡¡El cambio de los permisos se hizo con éxito!!" + "\033[0;m")
             elif response.status == 500:
