@@ -34,6 +34,8 @@ class LanzadorCliente():
                     break
             elif respuesta == 1:
                 self.crearUsuario()
+            elif respuesta == 2:
+                self.modificarPermisos()
             elif respuesta == 3:
                 print("\nObteniendo los valores....")
                 self.llamarSensores()
@@ -43,7 +45,20 @@ class LanzadorCliente():
         username: str = input('\tUsername: ')
         password: str = getpass('\tPassword: ')
         self.__auth_service.newUser(username, password, self.__sesion_id)
-        return 
+        return 0
+
+    def modificarPermisos(self):
+        print("Marca el nombre del usuario al que quieras dar un derecho y el número con el derecho.")
+        print("\tAdminUsers = 1")
+        print("\tAdminRights = 2")
+        print("\tAdminSensors = 3")
+        print("\tAdminRules = 4")
+        print("\tViewReports = 5")
+        print("\n")
+        username: str = input('\tNombre de ususario a cambiar los derechos: ')
+        right: int = input("\tDerecho: ")
+        self.__auth_service.mod_permisos(self.__username, username, right)
+        return 0
 
     def llamarSensores(self):
         print("Escoja el tipo de sensor a consultar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
@@ -57,7 +72,7 @@ class LanzadorCliente():
         else:
             print("La has cagado cahval")
         self.__sensor_service.create_sensor(respuesta)
-        return 
+        return 0
 
     def login(self):
         while not self.__auth_service.is_running():
