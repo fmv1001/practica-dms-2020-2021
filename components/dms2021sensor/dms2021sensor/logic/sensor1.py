@@ -5,7 +5,7 @@ import subprocess
 class SensorMem(Sensor):
 
     def __init__(self):
-        self.__memUsada = 0
+        self.__memUsada = ''
         self.__monitorizar()
         return
 
@@ -13,7 +13,7 @@ class SensorMem(Sensor):
         result1 = subprocess.getoutput('grep MemTotal /proc/meminfo | awk \' {print $2 }\' ')
         result2 = subprocess.getoutput('grep MemAvailable /proc/meminfo | awk \' {print $2 }\' ')
         mem_usada = 100 - (int(result2)*100/int(result1))
-        self.__memUsada = mem_usada
+        self.__memUsada = str(mem_usada)
         return
     
     def obtenerSensor(self): # -> int

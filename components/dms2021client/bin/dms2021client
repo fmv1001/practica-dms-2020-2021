@@ -39,6 +39,10 @@ class LanzadorCliente():
             elif respuesta == 3:
                 print("\nObteniendo los valores....")
                 self.llamarSensores()
+            elif respuesta == 4:
+                print("\nRedirigiendo a sensores....")
+                self.actualizarSensores()
+            pause = input('\tIntro para continuar')
 
     def crearUsuario(self):
         print("\nNEW USER -->")
@@ -70,13 +74,31 @@ class LanzadorCliente():
         print("[1] Sensor memoria RAM")
         print("[2] Sensor memoria Swap")
         print("[3] Sensor peso archivo")
-        respuesta = str(input("Escoge el sensor que desees: "))
+        tipo_sensor = str(input("Escoge el sensor que desees: "))
+        print("tipo sensor escogido = ", tipo_sensor)
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
             print("Se inicia correctamente")
+            self.__sensor_service.create_sensor(tipo_sensor)
         else:
-            print("La has cagado cahval")
-        self.__sensor_service.create_sensor(respuesta)
+            print("La has cagado chavalito")
+        
+        return 0
+
+    def actualizarSensores(self):
+        print("Escoja el tipo de sensor a actualizar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
+        print("[1] Sensor memoria RAM")
+        print("[2] Sensor memoria Swap")
+        print("[3] Sensor peso archivo")
+        tipo_sensor = str(input("Escoge el sensor que desees: "))
+        print("tipo sensor escogido = ", tipo_sensor)
+        self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
+        if(self.__sensor_service.is_running() == True):
+            print("Se inicia correctamente")
+            self.__sensor_service.actualizar_sensor(tipo_sensor)
+        else:
+            print("La has cagado chavalito")
+        
         return 0
 
     def login(self):

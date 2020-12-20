@@ -21,18 +21,17 @@ cfg.load_from_file(cfg.default_config_file())
 def is_running():
     return ('', 200, {'Content-Type': 'text/plain'})
 
-@app.route('/consultarsensor', methods=['GET'])
-def consulta_sensor():
-    print("HOLA HE ENTRADO")
-    '''
-    try:
-        respuesta = request.form['respuesta']
-    except KeyError:
-        respuesta = ''
-    '''
-    respuesta = str(1)
-    response: RestResponse = sensor_rest_api.monitorizarSensor(respuesta)
+@app.route('/consultarsensor/<string:tipo_sensor>', methods=['GET'])
+def consulta_sensor(tipo_sensor: str):
+    response: RestResponse = sensor_rest_api.monitorizarSensor(tipo_sensor)
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
+
+@app.route('/actualizarsensor/<string:tipo_sensor>', methods=['POST'])
+def actualizar_sensor(tipo_sensor: str):
+    response: RestResponse = sensor_rest_api.actualizar_sensor(tipo_sensor)
+    return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
 
 @app.errorhandler(Exception)
 def handle_exception(e):
