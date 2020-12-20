@@ -34,3 +34,9 @@ Just run `dms2021client` as any other program.
 Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las siguientes acciones mostradas en el menu:
 
 - `Crear usuarios`: Si el usuario con el que se ha hecho el login tiene el permiso `AdminUsers`, podra crear usuarios que seran anadidos al sistema. Este usuario se inicia sin permisos y es anadido en la base de datos del servicio de autentificacion. Las credenciales del nuevo usuario se pediran por pantalla.
+- `Cambiar permisos de un usuario`: Si el usuario con el que se ha hecho el login tiene el permiso `AdminRights`, podra cambiar los permisos de un usuario que sera modificado en el sistema. Los cambios son anadidos en la base de datos del servicio de autentificacion. Las credenciales del usuario a cambiar los permisos y el permiso a modificar se piden por pantalla.
+- `Obtener los resultados de un sensor`: Si escogemos esta opcion se mostrara un menu con los diferentes sensores de los que dispone el sistema y podremos elegir de que sensor queremos obtener su valor, esta opcion se pide por pantalla. 
+  - Si escogemos el `sensor de memoria RAM`, nos muestra el valor de la memoria RAM usuada del sistema. 
+  - Los demas sensores nos mostraran un mensaje indicando que no estan implementados en el sistema. Seran implementados en proximas versiones.
+- `Actualizar los resultados de un sensor`: se actualizara el valor del sensor deseado (escogido por pantalla). Como se ha mencionado, solo esta implementado el sensor de memoria RAM, los demas sensores no estan disponibles en esta version.
+- `SALIR`: se cerrara la sesion del usuario actual y con ello el programa.
