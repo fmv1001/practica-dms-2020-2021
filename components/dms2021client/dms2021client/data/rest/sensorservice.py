@@ -50,10 +50,18 @@ class SensorService():
         except ConnectionRefusedError:
             return False
 
-    def create_sensor(self):
+    def create_sensor(self, respuesta: str):
+        form: str = urlencode({'respuesta': respuesta})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+
         connection: HTTPConnection = self.__get_connection()
-        connection.request('GET', '/consultarSensor')
+        print("VOY A ENTRAR")
+        connection.request('GET', '/consultarsensor')
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
             print("MUY BIEN!!!")
+        else:
+            print("Hay algún error", response.status)
 

@@ -116,5 +116,4 @@ class AuthService():
         else:
             print("VAYA POR DIOS....", response.status)
 
-
         return

@@ -50,8 +50,12 @@ class LanzadorCliente():
         print("[1] Sensor memoria RAM")
         print("[2] Sensor memoria Swap")
         print("[3] Sensor peso archivo")
-        respuesta = int(input("Escoge el sensor que desees: "))
-        self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host,self.__cfg.get_sensor_service_port)
+        respuesta = str(input("Escoge el sensor que desees: "))
+        self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
+        if(self.__sensor_service.is_running() == True):
+            print("Se inicia correctamente")
+        else:
+            print("La has cagado cahval")
         self.__sensor_service.create_sensor(respuesta)
         return 
 

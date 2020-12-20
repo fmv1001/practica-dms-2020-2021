@@ -6,12 +6,13 @@ class RestSensor():
     def __init__(self):
         return
 
-    def monitorizarSensor(self, sensor_type : int) -> RestResponse:
+    def monitorizarSensor(self, sensor_type : str) -> RestResponse:
         try:
-            if sensor_type==1:
+            if int(sensor_type)==1:
                 sensor = SensorMem()
-                print(sensor)
         except ValueError:
             return RestResponse(code=400,mime_type='text/plain')
+        except:
+            return RestResponse(code=501,mime_type='text/plain')
 
-        return RestResponse(sensor.obtenerSensor(), 200, mime_type='text/plain')
+        return RestResponse(print(sensor), 200, mime_type='text/plain')
