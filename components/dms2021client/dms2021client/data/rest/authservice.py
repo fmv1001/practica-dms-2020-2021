@@ -5,6 +5,7 @@ import json
 from urllib.parse import urlencode
 from http.client import HTTPConnection, HTTPResponse, HTTPException
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
+from dms2021core.data import UserRightName
 
 
 class AuthService():
@@ -117,3 +118,42 @@ class AuthService():
             print("VAYA POR DIOS....", response.status)
 
         return
+
+    def mod_permisos(self, usernameAdmin: str, usernameChanges: str, rightChanges: int):
+        form: str = urlencode({'session_id': session_id})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+
+        right_change:str
+        if rightChanges == 1:
+            right_change = UserRightName.AdminUsers
+        elif rightChanges == 2:
+            right_change = UserRightName.AdminRights
+        elif rightChanges == 3:
+            right_change = UserRightName.AdminSensors
+        elif rightChanges == 4:
+            right_change = UserRightName.AdminRules
+        elif rightChanges == 5:
+            right_change = UserRightName.ViewReports
+        
+        connection: HTTPConnection = self.__get_connection()
+        connection.request('GET', '/users/' + usernameAdmin + '/rights/'+ UserRightName.AdminRights)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            connection.request('POST', '/users/' + usernameChanges + '/rights/' + right_change, form, headers)
+            response: HTTPResponse = connection.getresponse()
+            if response.status == 200:
+                print("CAMBIO con exito!!")
+            elif response.status == 500:
+                raise HTTPException('Server error')
+            else:
+                print("ERROR, no da permiso: ", response.status)
+                return
+        elif response.status == 401:
+            raise UnauthorizedError()
+        else:
+            print("VAYA POR DIOS....", response.status)
+            return
+
+        
