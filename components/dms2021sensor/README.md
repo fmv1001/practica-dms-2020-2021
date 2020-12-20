@@ -42,14 +42,14 @@ This service exposes a REST API so other services/applications can interact with
     - `200 OK` if the service is running.
 - `/consultarsensor/<string:tipo_sensor>` [`GET`]
 
-  Logs a user in.
+  Sensor value query.
   - Parameters:
     - `tipo_sensor` [path] (`str`): The sensor type.
   - Returns:
     - `200 OK` if the sensor was obtained successfully. The response content (`str`) is a string containing the sensor value.
   - `/actualizarsensor/<string:tipo_sensor>` [`POST`]
 
-  Logs a user in.
+  Sensor value update.
   - Parameters:
     - `tipo_sensor` [path] (`str`): The sensor type.
   - Returns:
