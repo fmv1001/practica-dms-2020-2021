@@ -69,4 +69,4 @@ This service exposes a REST API so other services/applications can interact with
 - Diagrama UML de la arquitectura del sensor
   - En la siguiente imagen podemos ver el diagrama UML que muestra la estructura interna del servicio del sensor
 
-      ![Alt text](Diagrama_Sensor.png?raw=true "Optional Title")
+    - ![Alt text](Diagrama_Sensor.png?raw=true "Optional Title")
