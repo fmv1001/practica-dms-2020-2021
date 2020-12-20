@@ -44,7 +44,17 @@ Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las 
 ## Arquitectura y diseno del cliente
 
 - Descripcion de la arquitectura y diseno del cliente
-  - Descripcion
+  
+  - Diseno basado en el modelo-vista-controlador (MVC)
+  
+  - La arquitectura del servicio del sensor se divide en 3 carpetas. 
+    - Una primera carpeta de datos (`data`) que contine la configuracion del servicio del cliente en la carpeta `config`, y una carpeta rest que contienelos servicios para la cominicacion con el servicio de autentificacion y el servicio de los sensores.
+    - Una carpeta llamada `logic` que no es usada, pero en proximas actualizaciones se estructuraran los metodos de la funcionalidad del cliente en archivos que se ubicaran en esta carpeta.
+    - Una ultima carpeta que implementa la capa de presentacion (`presentation`). Dentro de ella encontramos dos archivos.
+      - `menuOpciones` que contiene el menu con las opciones de la funcionalidad del sistema.
+      - `logoutService` que implementa el cierre de la sesion actual y con ello el cierre del sistema.
   
 - Diagrama UML de la arquitectura del cliente
-  - Foto
+  - En la siguiente imagen podemos ver el diagrama UML que muestra la estructura interna del servicio del cliente
+
+    - ![Alt text](Diagrama_Cliente.png?raw=true "Diagrama UML Cliente")
