@@ -47,7 +47,7 @@ This service exposes a REST API so other services/applications can interact with
     - `tipo_sensor` [path] (`str`): The sensor type.
   - Returns:
     - `200 OK` if the sensor was obtained successfully. The response content (`str`) is a string containing the sensor value.
-  - `/actualizarsensor/<string:tipo_sensor>` [`POST`]
+- `/actualizarsensor/<string:tipo_sensor>` [`POST`]
 
   Sensor value update.
   - Parameters:
