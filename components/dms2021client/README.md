@@ -57,4 +57,10 @@ Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las 
 - Diagrama UML de la arquitectura del cliente
   - En la siguiente imagen podemos ver el diagrama UML que muestra la estructura interna del servicio del cliente
 
-    - ![Alt text](Diagrama_Cliente.png?raw=true "Diagrama UML Cliente")
+   ![Alt text](Diagrama_Cliente.png?raw=true "Diagrama UML Cliente")
+
+
+## Protocolo de comunicaciones cliente-servidor
+
+  - `LanzadorCliente` recoge de `ClientConfiguration` todo lo necesario para establecer una conexión con los  servicios de sensores y el servicio de autenticacion.
+  - La clase `LanzadorCliente` hace uso de las clases `AuthService` y `SensorService` para poder ejecutar los servicios de autenticación y los servicios que proporcionan los sensores.
