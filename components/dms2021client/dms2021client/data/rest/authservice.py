@@ -126,7 +126,7 @@ class AuthService():
             return
         return
 
-    def mod_permisos(self, usernameAdmin: str, usernameChanges: str, rightChanges: int, session_id: str):
+    def dar_quitar_permisos(self, usernameAdmin: str, usernameChanges: str, rightChanges: int, session_id: str, dar_quitar:str):
         form: str = urlencode({'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
@@ -147,7 +147,7 @@ class AuthService():
         connection.request('GET', '/users/' + usernameAdmin + '/rights/AdminRights')
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
-            connection.request('POST', '/users/' + usernameChanges + '/rights/' + right_change, form, headers)
+            connection.request(dar_quitar, '/users/' + usernameChanges + '/rights/' + right_change, form, headers)
             response: HTTPResponse = connection.getresponse()
             if response.status == 200:
                 print("CAMBIO con exito!!")
