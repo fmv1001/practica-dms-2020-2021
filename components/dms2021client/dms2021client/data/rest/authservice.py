@@ -103,42 +103,48 @@ class AuthService():
         if response.status == 500:
             raise HTTPException('Server error')
 
-    def newUser(self,username: str, password: str, session_id: str):
+    def newUser(self, usernameAdmin: str,username: str, password: str, session_id: str):
         form: str = urlencode({'username': username, 'password': password, 'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
         }
-
         connection: HTTPConnection = self.__get_connection()
-        connection.request('POST', '/users',form, headers)
+        connection.request('GET', '/users/' + usernameAdmin + '/rights/AdminUsers')
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
-            print("MUY BIEN SE HA CREADO!!!")
+            connection: HTTPConnection = self.__get_connection()
+            connection.request('POST', '/users',form, headers)
+            response: HTTPResponse = connection.getresponse()
+            if response.status == 200:
+                print("MUY BIEN SE HA CREADO!!!")
+            else:
+                print("Usuario no creado", response.status)
+        elif response.status == 401:
+            raise UnauthorizedError()
         else:
-            print("VAYA POR DIOS....", response.status)
-
+            print("Otro ERROR: ....", response.status)
+            return
         return
 
-    def mod_permisos(self, usernameAdmin: str, usernameChanges: str, rightChanges: int):
+    def mod_permisos(self, usernameAdmin: str, usernameChanges: str, rightChanges: int, session_id: str):
         form: str = urlencode({'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
         }
-
-        right_change:str
+        right_change:str = ''
         if rightChanges == 1:
-            right_change = UserRightName.AdminUsers
+            right_change = 'AdminUsers'
         elif rightChanges == 2:
-            right_change = UserRightName.AdminRights
+            right_change = 'AdminRights'
         elif rightChanges == 3:
-            right_change = UserRightName.AdminSensors
+            right_change = 'AdminSensors'
         elif rightChanges == 4:
-            right_change = UserRightName.AdminRules
+            right_change = 'AdminRules'
         elif rightChanges == 5:
-            right_change = UserRightName.ViewReports
+            right_change = 'ViewReports'
         
         connection: HTTPConnection = self.__get_connection()
-        connection.request('GET', '/users/' + usernameAdmin + '/rights/'+ UserRightName.AdminRights)
+        connection.request('GET', '/users/' + usernameAdmin + '/rights/AdminRights')
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
             connection.request('POST', '/users/' + usernameChanges + '/rights/' + right_change, form, headers)

@@ -10,7 +10,7 @@ from dms2021client.presentation.menuOpciones import menuDeOpciones
 from dms2021client.presentation.logoutService import  Exit
 
 class LanzadorCliente():
-    __sesion_id: str
+    __session_id: str
     __username: str
     __auth_service: AuthService
     __cfg: ClientConfiguration
@@ -22,14 +22,14 @@ class LanzadorCliente():
         self.__cfg= ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-        self.__sesion_id, self.__username = self.login()
+        self.__session_id, self.__username = self.login()
 
         while True:
             salida_pantalla = menuDeOpciones()
             respuesta = salida_pantalla.menu()
 
             if respuesta == 0:
-                salir_programa = Exit(self.__sesion_id, self.__auth_service)
+                salir_programa = Exit(self.__session_id, self.__auth_service)
                 if(salir_programa.exitPagina() == -1):
                     break
             elif respuesta == 1:
@@ -44,7 +44,7 @@ class LanzadorCliente():
         print("\nNEW USER -->")
         username: str = input('\tUsername: ')
         password: str = getpass('\tPassword: ')
-        self.__auth_service.newUser(username, password, self.__sesion_id)
+        self.__auth_service.newUser(self.__username, username, password, self.__session_id)
         return 0
 
     def modificarPermisos(self):
@@ -56,8 +56,8 @@ class LanzadorCliente():
         print("\tViewReports = 5")
         print("\n")
         username: str = input('\tNombre de ususario a cambiar los derechos: ')
-        right: int = input("\tDerecho: ")
-        self.__auth_service.mod_permisos(self.__username, username, right)
+        right: int = int(input("\tDerecho: "))
+        self.__auth_service.mod_permisos(self.__username, username, right, self.__session_id)
         return 0
 
     def llamarSensores(self):
@@ -88,7 +88,7 @@ class LanzadorCliente():
             print('Logged in successfully as ' + username + ' . Session id: ' + self.__session_id)
         except InvalidCredentialsError:
             print('Wrong username and/or password. Try again.')
-            self.__sesion_id, self.__username = self.login()
+            self.__session_id, self.__username = self.login()
         except Exception as ex:
             print(ex)
         
