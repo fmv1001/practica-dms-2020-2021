@@ -40,3 +40,11 @@ Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las 
   - Los demas sensores nos mostraran un mensaje indicando que no estan implementados en el sistema. Seran implementados en proximas versiones.
 - `Actualizar los resultados de un sensor`: se actualizara el valor del sensor deseado (escogido por pantalla). Como se ha mencionado, solo esta implementado el sensor de memoria RAM, los demas sensores no estan disponibles en esta version.
 - `SALIR`: se cerrara la sesion del usuario actual y con ello el programa.
+
+## Arquitectura y diseno del cliente
+
+- Descripcion de la arquitectura y diseno del cliente
+  - Descripcion
+  
+- Diagrama UML de la arquitectura del cliente
+  - Foto
