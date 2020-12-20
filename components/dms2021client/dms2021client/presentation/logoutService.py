@@ -12,7 +12,9 @@ class Exit():
     def exitPagina(self):
         try:
             self.__auth_service.logout(self.__session_id)
-            print('Logged out successfully')
+            print("\x1b[1;31m" + "+----------------------------+")
+            print("| Logged out successfully    |")
+            print("+----------------------------+" + '\033[0;m')
             return -1
         except Exception as ex:
             print(ex)

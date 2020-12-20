@@ -12,9 +12,9 @@ class RestSensor():
             if int(sensor_type)==1:
                 resultado = self.__sensor.obtenerSensor()
             elif int(sensor_type)==2:
-                resultado = 'Sensor 2 no implementado, en proximas actualizaciones'
+                resultado = 'Sensor 2 no implementado, en proximas actualizaciones...'
             else:
-                resultado = 'Sensor no implementado, en proximas actualizaciones'
+                resultado = 'Sensor 3 no implementado, en proximas actualizaciones...'
         except ValueError:
             return RestResponse(code=400,mime_type='text/plain')
 
@@ -26,9 +26,9 @@ class RestSensor():
                 self.__sensor.actualizarSensor()
                 resultado = self.__sensor.obtenerSensor()
             elif int(sensor_type)==2:
-                resultado = 'Sensor 2 no implementado, en proximas actualizaciones'
+                resultado = 'Sensor 2 no implementado, en proximas actualizaciones...'
             else:
-                resultado = 'Sensor no implementado, en proximas actualizaciones'
+                resultado = 'Sensor 3 no implementado, en proximas actualizaciones...'
         except ValueError:
             return RestResponse(code=400,mime_type='text/plain')
 

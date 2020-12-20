@@ -116,9 +116,9 @@ class AuthService():
             connection.request('POST', '/users',form, headers)
             response: HTTPResponse = connection.getresponse()
             if response.status == 200:
-                print("MUY BIEN SE HA CREADO!!!")
+                print("\x1b[1;32m" + "¡¡¡MUY BIEN SE HA CREADO!!!" + "\033[0;m")
             else:
-                print("Usuario no creado", response.status)
+                print("Usuario no creado con éxito --> ", response.status)
         elif response.status == 401:
             raise UnauthorizedError()
         else:
@@ -150,16 +150,16 @@ class AuthService():
             connection.request(dar_quitar, '/users/' + usernameChanges + '/rights/' + right_change, form, headers)
             response: HTTPResponse = connection.getresponse()
             if response.status == 200:
-                print("CAMBIO con exito!!")
+                print("\x1b[1;32m" + "¡¡El cambio de los permisos se hizo con éxito!!" + "\033[0;m")
             elif response.status == 500:
                 raise HTTPException('Server error')
             else:
-                print("ERROR, no da permiso: ", response.status)
+                print("ERROR, no se de el permiso correctamente por el error --> ", response.status)
                 return
         elif response.status == 401:
             raise UnauthorizedError()
         else:
-            print("VAYA POR DIOS....", response.status)
+            print("Error....", response.status)
             return
 
         

@@ -10,6 +10,7 @@ from dms2021client.presentation.menuOpciones import menuDeOpciones
 from dms2021client.presentation.logoutService import  Exit
 
 class LanzadorCliente():
+
     __session_id: str
     __username: str
     __auth_service: AuthService
@@ -17,8 +18,11 @@ class LanzadorCliente():
     __sensor_service: SensorService
 
     def __init__(self):
-        print("¡¡BIENVENIDO!!")
-        print("El programa se está iniciando")
+        print("\x1b[1;35m" + "+------------------+")
+        print("| ¡¡BIENVENIDO!!   |")
+        print("+------------------+" + '\033[0;m')
+        print("\n\tEl programa se está iniciando.....")
+
         self.__cfg= ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
@@ -37,14 +41,16 @@ class LanzadorCliente():
             elif respuesta == 2:
                 self.modificarPermisos()
             elif respuesta == 3:
-                print("\nObteniendo los valores....")
                 self.llamarSensores()
             elif respuesta == 4:
-                print("\nRedirigiendo a sensores....")
                 self.actualizarSensores()
-            pause = input('\tIntro para continuar')
+            print("_________________________________________________")
+            pause = input('\n\tIntro para continuar ...')
 
     def crearUsuario(self):
+        """ Método que pide por paramatró nombre y contraseña para la creación de un usuario."""
+        
+        print("\n_________________________________________________\n")
         print("\nNEW USER -->")
         username: str = input('\tUsername: ')
         password: str = getpass('\tPassword: ')
@@ -52,6 +58,10 @@ class LanzadorCliente():
         return 0
 
     def modificarPermisos(self):
+        """ Metodo que nos permite seleccionar un usuario y modificar (quitar o añadir) el permiso
+        que deseemos. """
+
+        print("\n_________________________________________________\n")
         print("Marca el nombre del usuario al que quieras dar o quitar un derecho y el número con el derecho.")
         print("\tAdminUsers = 1")
         print("\tAdminRights = 2")
@@ -59,6 +69,7 @@ class LanzadorCliente():
         print("\tAdminRules = 4")
         print("\tViewReports = 5")
         print("\n")
+
         username: str = input('\tNombre de ususario a cambiar los derechos: ')
         right: int = int(input("\tDerecho: "))
 
@@ -70,34 +81,42 @@ class LanzadorCliente():
         return 0
 
     def llamarSensores(self):
+        """ Método que nos permite seleccionar un sensor del que queramos obtener los datos. """
+
+        print("\n_________________________________________________\n")
         print("Escoja el tipo de sensor a consultar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
-        print("[1] Sensor memoria RAM")
-        print("[2] Sensor memoria Swap")
-        print("[3] Sensor peso archivo")
-        tipo_sensor = str(input("Escoge el sensor que desees: "))
-        print("tipo sensor escogido = ", tipo_sensor)
+        print("\t[1] Sensor memoria RAM")
+        print("\t[2] Sensor memoria Swap")
+        print("\t[3] Sensor peso archivo")
+        print("\n")
+
+        tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
-            print("Se inicia correctamente")
+            print("\n\t...Se inicia correctamente...")
             self.__sensor_service.create_sensor(tipo_sensor)
         else:
-            print("La has cagado chavalito")
+            print("\n\tSE HA PRODUCIDO UN ERROR AL INICIAR EL SENSOR")
         
         return 0
 
     def actualizarSensores(self):
+        """ Método que actualiza el valor que devuelven los sensores. """
+
+        print("\n_________________________________________________\n")
         print("Escoja el tipo de sensor a actualizar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
-        print("[1] Sensor memoria RAM")
-        print("[2] Sensor memoria Swap")
-        print("[3] Sensor peso archivo")
-        tipo_sensor = str(input("Escoge el sensor que desees: "))
-        print("tipo sensor escogido = ", tipo_sensor)
+        print("\t[1] Sensor memoria RAM")
+        print("\t[2] Sensor memoria Swap")
+        print("\t[3] Sensor peso archivo")
+        print("\n")
+        
+        tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
-            print("Se inicia correctamente")
+            print("\n\t...Se inicia correctamente...")
             self.__sensor_service.actualizar_sensor(tipo_sensor)
         else:
-            print("La has cagado chavalito")
+            print("\n\tSE HA PRODUCIDO UN ERROR AL INICIAR EL SENSOR")
         
         return 0
 
