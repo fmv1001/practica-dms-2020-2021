@@ -63,11 +63,16 @@ class SensorService():
 
         if response.status == 200:
             print("\t\t·Respuesta del sensor:")
-            print("\t\t",response.read())
+            json_response = response.read()
+            sesnor_dict = json.loads(json_response)
+            print("\t\t",sesnor_dict)
         else:
             print("Hay algún error en el sensorrest, error: ", response.status)
             print("Respuesta del sensor errado:")
-            print("\t",response.read())
+            json_response = response.read()
+            sesnor_dict = json.loads(json_response)
+            print("\t\t",sesnor_dict)
+        return 
     
     def actualizar_sensor(self, sensor_type: str):
         """ Actualiza el sensor indicado.
@@ -81,8 +86,13 @@ class SensorService():
         
         if response.status == 200:
             print("\t\t·Respuesta del sensor:")
-            print("\t\t",response.read())
+            json_response = response.read()
+            sesnor_dict = json.loads(json_response)
+            print("\t\t",sesnor_dict)
         else:
             print("Hay algún error en el sensorrest, error: ", response.status)
             print("Respuesta del sensor errado:")
-            print("\t",response.read())
+            json_response = response.read()
+            sesnor_dict = json.loads(json_response)
+            print("\t\t",sesnor_dict)
+        return
