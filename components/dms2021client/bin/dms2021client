@@ -41,7 +41,7 @@ class LanzadorCliente():
             elif respuesta == 2:
                 self.modificarPermisos()
             elif respuesta == 3:
-                self.llamarSensores()
+                self.consultarSensores()
             elif respuesta == 4:
                 self.actualizarSensores()
             print("_________________________________________________")
@@ -80,7 +80,7 @@ class LanzadorCliente():
             self.__auth_service.dar_quitar_permisos(self.__username, username, right, self.__session_id, 'DELETE')
         return 0
 
-    def llamarSensores(self):
+    def consultarSensores(self):
         """ Método que nos permite seleccionar un sensor del que queramos obtener los datos. """
 
         print("\n_________________________________________________\n")
@@ -93,8 +93,10 @@ class LanzadorCliente():
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
-            print("\n\t...Se inicia correctamente...")
-            self.__sensor_service.create_sensor(tipo_sensor)
+            print("\n\t...Obteniendo datos...")
+            dict_respuesta = self.__sensor_service.consulta_sensor(tipo_sensor)
+            print("\t\t·Respuesta del sensor:")
+            print("\t\t",dict_respuesta)
         else:
             print("\n\tSE HA PRODUCIDO UN ERROR AL INICIAR EL SENSOR")
         
@@ -113,8 +115,10 @@ class LanzadorCliente():
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
-            print("\n\t...Se inicia correctamente...")
-            self.__sensor_service.actualizar_sensor(tipo_sensor)
+            print("\n\t...Actualizando sensores...")
+            dict_respuesta = self.__sensor_service.actualizar_sensor(tipo_sensor)
+            print("\t\t·Respuesta del sensor:")
+            print("\t\t",dict_respuesta)
         else:
             print("\n\tSE HA PRODUCIDO UN ERROR AL INICIAR EL SENSOR")
         

@@ -50,7 +50,7 @@ class SensorService():
         except ConnectionRefusedError:
             return False
 
-    def create_sensor(self, sensor_type: str):
+    def consulta_sensor(self, sensor_type: str):
         """ Proporciona la salidaa de un sensor indicado.
         ---
         Returns: 
@@ -62,17 +62,13 @@ class SensorService():
         response: HTTPResponse = connection.getresponse()
 
         if response.status == 200:
-            print("\t\t·Respuesta del sensor:")
             json_response = response.read()
             sesnor_dict = json.loads(json_response)
-            print("\t\t",sesnor_dict)
+            return sesnor_dict
         else:
             print("Hay algún error en el sensorrest, error: ", response.status)
-            print("Respuesta del sensor errado:")
-            json_response = response.read()
-            sesnor_dict = json.loads(json_response)
-            print("\t\t",sesnor_dict)
-        return 
+            raise Exception()
+        return ''
     
     def actualizar_sensor(self, sensor_type: str):
         """ Actualiza el sensor indicado.
@@ -85,14 +81,10 @@ class SensorService():
         response: HTTPResponse = connection.getresponse()
         
         if response.status == 200:
-            print("\t\t·Respuesta del sensor:")
             json_response = response.read()
             sesnor_dict = json.loads(json_response)
-            print("\t\t",sesnor_dict)
+            return sesnor_dict
         else:
             print("Hay algún error en el sensorrest, error: ", response.status)
-            print("Respuesta del sensor errado:")
-            json_response = response.read()
-            sesnor_dict = json.loads(json_response)
-            print("\t\t",sesnor_dict)
-        return
+            raise Exception()
+        return ''
