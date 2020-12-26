@@ -44,8 +44,8 @@ class LanzadorCliente():
                 self.consultarSensores()
             elif respuesta == 4:
                 self.actualizarSensores()
-            print("_________________________________________________")
-            pause = input('\n\tIntro para continuar ...')
+            print("\t_________________________________________________")
+            pause = input('\n\t\tIntro para continuar ...')
 
     def crearUsuario(self):
         """ Método que pide por paramatró nombre y contraseña para la creación de un usuario."""
@@ -83,20 +83,21 @@ class LanzadorCliente():
     def consultarSensores(self):
         """ Método que nos permite seleccionar un sensor del que queramos obtener los datos. """
 
-        print("\n_________________________________________________\n")
-        print("Escoja el tipo de sensor a consultar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
-        print("\t[1] Sensor memoria RAM")
-        print("\t[2] Sensor memoria Swap")
-        print("\t[3] Sensor peso archivo")
+        print("\n\t_________________________________________________\n")
+        print("\tEscoja el tipo de sensor a consultar ")
+        print("\t\t[1] Sensor del sistema")
+        print("\t\t[2] Sensor de un directorio")
         print("\n")
 
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
-            print("\n\t...Obteniendo datos...")
+            print("\n\t\t...Obteniendo datos...\n")
             dict_respuesta = self.__sensor_service.consulta_sensor(tipo_sensor)
-            print("\t\t·Respuesta del sensor:")
-            print("\t\t",dict_respuesta)
+            print("\t\t - Respuesta del sensor:")
+            for i in dict_respuesta.keys():
+                print("\t\t\t",i,"\t\t",dict_respuesta[i])
+            #print("\t\t\t",dict_respuesta)
         else:
             print("\n\tSE HA PRODUCIDO UN ERROR AL INICIAR EL SENSOR")
         
@@ -105,20 +106,21 @@ class LanzadorCliente():
     def actualizarSensores(self):
         """ Método que actualiza el valor que devuelven los sensores. """
 
-        print("\n_________________________________________________\n")
-        print("Escoja el tipo de sensor a actualizar (por ahora solo funciona el sensor 1, proximas actualizaciones en enero de 2021)")
-        print("\t[1] Sensor memoria RAM")
-        print("\t[2] Sensor memoria Swap")
-        print("\t[3] Sensor peso archivo")
+        print("\n\t_________________________________________________\n")
+        print("\tEscoja el tipo de sensor a actualizar ")
+        print("\t\t[1] Sensor del sistema")
+        print("\t\t[2] Sensor de un directorio")
         print("\n")
         
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         if(self.__sensor_service.is_running() == True):
-            print("\n\t...Actualizando sensores...")
+            print("\n\t\t...Actualizando sensores...\n")
             dict_respuesta = self.__sensor_service.actualizar_sensor(tipo_sensor)
-            print("\t\t·Respuesta del sensor:")
-            print("\t\t",dict_respuesta)
+            print("\t\t - Respuesta del sensor:")
+            for i in dict_respuesta.keys():
+                print("\t\t\t",i,"\t\t",dict_respuesta[i])
+            #print("\t\t\t",dict_respuesta)
         else:
             print("\n\tSE HA PRODUCIDO UN ERROR AL INICIAR EL SENSOR")
         
