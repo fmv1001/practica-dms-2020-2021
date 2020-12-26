@@ -7,6 +7,3 @@ class Sensor(ABC):
     def actualizarSensor(self):
         pass
 
-    @abstractmethod
-    def copy(self):
-        pass
