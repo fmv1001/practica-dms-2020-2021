@@ -26,7 +26,8 @@ class LanzadorCliente():
         self.__cfg= ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-        self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
+        self.__sensor1_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
+        self.__sensor2_service = SensorService(self.__cfg.get_sensor2_service_host(),self.__cfg.get_sensor2_service_port())
         self.__session_id, self.__username = self.login()
 
         while True:
@@ -94,9 +95,9 @@ class LanzadorCliente():
 
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         
-        if(self.__sensor_service.is_running() == True):
+        if(self.__sensor1_service.is_running() == True):
             print("\n\t\t...Obteniendo datos...\n")
-            dict_respuesta = self.__sensor_service.consulta_sensor(tipo_sensor)
+            dict_respuesta = self.__sensor1_service.consulta_sensor(tipo_sensor)
             print("\t\t - Respuesta del sensor:")
             for i in dict_respuesta.keys():
                 print("\t\t\t",i,"\t\t",dict_respuesta[i])
@@ -117,9 +118,9 @@ class LanzadorCliente():
         
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
 
-        if(self.__sensor_service.is_running() == True):
+        if(self.__sensor1_service.is_running() == True):
             print("\n\t\t...Actualizando sensores...\n")
-            dict_respuesta = self.__sensor_service.actualizar_sensor(tipo_sensor)
+            dict_respuesta = self.__sensor1_service.actualizar_sensor(tipo_sensor)
             print("\t\t - Respuesta del sensor:")
             for i in dict_respuesta.keys():
                 print("\t\t\t",i,"\t\t",dict_respuesta[i])
@@ -161,9 +162,9 @@ class LanzadorCliente():
         tipo_sensor = str(input("\tEscoge el sensor que desees: "))
         regla = self.menureglas(tipo_sensor)
 
-        if(self.__sensor_service.is_running() == True):
+        if(self.__sensor1_service.is_running() == True):
             print("\n\t\t...Actualizando reglas...\n")
-            dict_respuesta = self.__sensor_service.actualizarlasreglas(tipo_sensor, regla)
+            dict_respuesta = self.__sensor1_service.actualizarlasreglas(tipo_sensor, regla)
             print("\t\t - Respuesta del sensor:")
             for i in dict_respuesta.keys():
                 print("\t\t\t",i,"\t\t",dict_respuesta[i])

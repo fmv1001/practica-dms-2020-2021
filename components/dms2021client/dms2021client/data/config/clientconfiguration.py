@@ -120,3 +120,31 @@ class ClientConfiguration(Configuration):
         dict_aux: dict = sensor_service_value['sensor1']
 
         return int(str(dict_aux['port']))
+
+    def get_sensor2_service_host(self) -> str:
+        """ Gets the authentication service host configuration value.
+        ---
+        Returns:
+            A string with the value of authservice host.
+        Throws:
+            - TypeError: if the authservice parameter is not a dictionary.
+        """
+
+        sensor_service_value: dict = self.__get_sensor_service_value()
+        dict_aux: dict = sensor_service_value['sensor2']
+
+        return str(dict_aux['host'])
+
+    def get_sensor2_service_port(self) -> int:
+        """ Gets the authentication service port configuration value.
+        ---
+        Returns:
+            An integer with the value of authservice port.
+        Throws:
+            - TypeError: if the authservice parameter is not a dictionary.
+        """
+
+        sensor_service_value: dict = self.__get_sensor_service_value()
+        dict_aux: dict = sensor_service_value['sensor2']
+
+        return int(str(dict_aux['port']))
