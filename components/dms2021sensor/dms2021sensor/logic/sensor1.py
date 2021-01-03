@@ -5,13 +5,14 @@ import subprocess
 class SensorMem(Sensor):
 
     def __init__(self):
+        self.__reglas = [1,0,1,0]
         self.__valores = {}
         self.__memUsada = '0'
         self.__swap = '0'
         self.__disk = '0'
         self.__CPU = '0'
         self.__monitorizar()
-        self.__rellenar()
+        self.__monitorizar_reglas()
         return
 
     def __monitorizar(self):
@@ -44,20 +45,32 @@ class SensorMem(Sensor):
         self.__valores["CPU"] = self.__CPU
         return
 
-
-
-    """
-    def __B2GB(self, bytes):
-        "Convertidor de bytes a gigabytes."
-        return bytes / 1024**3
-    """
+    def cambiar_reglas(self, regla):
+        if int(regla) > 4 or int(regla) < 1:
+            raise Exception
+        if self.__reglas[int(regla)-1] == 1:
+            self.__reglas[int(regla)-1] = 0
+        else:
+            self.__reglas[int(regla)-1] = 1
+        self.__monitorizar_reglas()
+        return
+    
+    def __monitorizar_reglas(self):
+        self.__rellenar()
+        eliminar_regla = []
+        for i,key in enumerate(self.__valores.keys()):
+            if self.__reglas[i] == 0:
+                eliminar_regla.append(key)
+        for key in eliminar_regla:
+            self.__valores.pop(key)
+        return
     
     def obtenerSensor(self): # -> dict
         return self.__valores
 
     def actualizarSensor(self):
         self.__monitorizar()
-        self.__rellenar()
+        self.__monitorizar_reglas()
         return
 
     def __str__(self):

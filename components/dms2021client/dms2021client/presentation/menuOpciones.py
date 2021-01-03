@@ -13,14 +13,15 @@ class menuDeOpciones():
         print("|        2.Cambiar permisos.                                            |")
         print("|        3.Obtener los resultados de un sensor.                         |")
         print("|        4.Actualizar los resultados de un sensor.                      |")
+        print("|        5.Actualizar las reglas de un sensor.                          |")
         print("|        0...SALIR...                                                   |")
         print("+-----------------------------------------------------------------------+")
         print('\033[0;m' + "\n")
         
         opcion = -1
-        while(opcion >4 or opcion < 0):
+        while(opcion >5 or opcion < 0):
             opcion  = int(input("\tIntroduce la opcion a la que desees acceder:"))
-            if(opcion >4 or opcion < 0):
+            if(opcion >5 or opcion < 0):
                 print("ERROR --> Porfavor introduce una opción de entre las que se encuentren disponibles.")
 
         return opcion

@@ -88,3 +88,22 @@ class SensorService():
             print("Hay algún error en el sensorrest, error: ", response.status)
             raise Exception()
         return ''
+
+    def actualizarlasreglas(self, sensor_type: str, regla:str):
+        """ Actualiza las reglas del sensor indicado.
+        ---
+        Returns: 
+            Tipo de sensor.
+        """
+        connection: HTTPConnection = self.__get_connection()
+        connection.request('POST', '/actualizarreglas/' + sensor_type + '/reglas/' + regla)
+        response: HTTPResponse = connection.getresponse()
+        
+        if response.status == 200:
+            json_response = response.read()
+            sesnor_dict = json.loads(json_response)
+            return sesnor_dict
+        else:
+            print("Hay algún error en el sensorrest, error: ", response.status)
+            raise Exception()
+        return ''

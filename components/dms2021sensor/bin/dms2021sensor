@@ -32,6 +32,10 @@ def actualizar_sensor(tipo_sensor: str):
     response: RestResponse = sensor_rest_api.actualizar_sensor(tipo_sensor)
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
+@app.route('/actualizarreglas/<string:tipo_sensor>/reglas/<string:regla>', methods=['POST'])
+def actualizarreglas(tipo_sensor: str, regla: str):
+    response: RestResponse = sensor_rest_api.actualizar_reglas(tipo_sensor, regla)
+    return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
 @app.errorhandler(Exception)
 def handle_exception(e):

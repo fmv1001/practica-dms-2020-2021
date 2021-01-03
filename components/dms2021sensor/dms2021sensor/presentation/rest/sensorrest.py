@@ -41,3 +41,20 @@ class RestSensor():
             return RestResponse(code=400,mime_type='text/plain')
 
         return RestResponse(resultado_json , 200, mime_type='text/plain')
+
+    def actualizar_reglas(self, sensor_type : str, regla: str) -> RestResponse:
+        try:
+            if int(sensor_type)==1:
+                self.__sensor1.cambiar_reglas(regla)
+                resultado = self.__sensor1.obtenerSensor()
+                resultado_json = json.dumps(resultado)
+            elif int(sensor_type)==2:
+                self.__sensor2.cambiar_reglas(regla)
+                resultado = self.__sensor2.obtenerSensor()
+                resultado_json = json.dumps(resultado)
+            else:
+                resultado = 'Sensor no implementado, en proximas actualizaciones...'
+        except ValueError:
+            return RestResponse(code=400,mime_type='text/plain')
+
+        return RestResponse(resultado_json , 200, mime_type='text/plain')
