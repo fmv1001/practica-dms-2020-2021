@@ -1,4 +1,5 @@
 from dms2021client.data.rest import AuthService
+import time
 
 class Exit():
 
@@ -15,6 +16,7 @@ class Exit():
             print("\x1b[1;31m" + "+----------------------------+")
             print("| Logged out successfully    |")
             print("+----------------------------+" + '\033[0;m')
+            time.sleep(2)
             return -1
         except Exception as ex:
             print(ex)
