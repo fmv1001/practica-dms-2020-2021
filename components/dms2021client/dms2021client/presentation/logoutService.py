@@ -1,5 +1,5 @@
-from dms2021client.data.rest import AuthService
 import time
+from dms2021client.data.rest import AuthService
 
 class Exit():
 
@@ -11,6 +11,8 @@ class Exit():
         self.__auth_service = auth_service
 
     def exitPagina(self):
+        """ Permite al usuario hacer un LogOut. """
+
         try:
             self.__auth_service.logout(self.__session_id)
             print("\x1b[1;31m" + "+----------------------------+")
@@ -20,5 +22,5 @@ class Exit():
             return -1
         except Exception as ex:
             print(ex)
-        
+
         return 0

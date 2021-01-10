@@ -1,5 +1,5 @@
 import os
-class menuDeOpciones():
+class MenuDeOpciones():
 
     def __init__(self):
         return
@@ -17,7 +17,7 @@ class menuDeOpciones():
         print("|        0...SALIR...                                                   |")
         print("+-----------------------------------------------------------------------+")
         print('\033[0;m' + "\n")
-        
+
         opcion = -1
         while(opcion >5 or opcion < 0):
             opcion  = int(input("\tIntroduce la opcion a la que desees acceder:"))
