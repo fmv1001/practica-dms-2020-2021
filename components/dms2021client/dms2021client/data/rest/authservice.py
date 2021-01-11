@@ -142,7 +142,7 @@ class AuthService():
             right_change = 'AdminRules'
         elif rightChanges == 5:
             right_change = 'ViewReports'
-        
+
         connection: HTTPConnection = self.__get_connection()
         connection.request('GET', '/users/' + usernameAdmin + '/rights/AdminRights')
         response: HTTPResponse = connection.getresponse()
@@ -161,5 +161,3 @@ class AuthService():
         else:
             print("Error....", response.status)
             return
-
-        

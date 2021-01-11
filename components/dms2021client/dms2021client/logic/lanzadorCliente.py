@@ -23,7 +23,7 @@ class LanzadorCliente():
         print("+------------------+" + '\033[0;m')
         print("\n\tEl programa se está iniciando.....")
         time.sleep(2)
-        
+
         self.__cfg= ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())

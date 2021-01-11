@@ -148,3 +148,4 @@ class ClientConfiguration(Configuration):
         dict_aux: dict = sensor_service_value['sensor2']
 
         return int(str(dict_aux['port']))
+        

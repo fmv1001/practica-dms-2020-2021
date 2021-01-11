@@ -20,7 +20,7 @@ class SensorService():
             - host: The authentication service host string.
             - port: The authentication service port number.
         """
-        
+
         self.__host: str = host
         self.__port: int = port
 
@@ -53,7 +53,7 @@ class SensorService():
     def consulta_sensor(self, sensor_type: str):
         """ Proporciona la salidaa de un sensor indicado.
         ---
-        Returns: 
+        Returns:
             Tipo de sensor.
         """
 
@@ -69,17 +69,17 @@ class SensorService():
             print("Hay algún error en el sensorrest, error: ", response.status)
             raise Exception()
         return ''
-    
+
     def actualizar_sensor(self, sensor_type: str):
         """ Actualiza el sensor indicado.
         ---
-        Returns: 
+        Returns:
             Tipo de sensor.
         """
         connection: HTTPConnection = self.__get_connection()
         connection.request('POST', '/actualizarsensor/' + sensor_type)
         response: HTTPResponse = connection.getresponse()
-        
+
         if response.status == 200:
             json_response = response.read()
             sesnor_dict = json.loads(json_response)
@@ -92,13 +92,13 @@ class SensorService():
     def actualizarlasreglas(self, sensor_type: str, regla:str):
         """ Actualiza las reglas del sensor indicado.
         ---
-        Returns: 
+        Returns:
             Tipo de sensor.
         """
         connection: HTTPConnection = self.__get_connection()
         connection.request('POST', '/actualizarreglas/' + sensor_type + '/reglas/' + regla)
         response: HTTPResponse = connection.getresponse()
-        
+
         if response.status == 200:
             json_response = response.read()
             sesnor_dict = json.loads(json_response)

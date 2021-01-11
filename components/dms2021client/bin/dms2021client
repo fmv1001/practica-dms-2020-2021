@@ -1,4 +1,2 @@
-"""
-Bin del cliente
-"""
+""" Client configuration classes."""
 from dms2021client.logic.lanzadorCliente import LanzadorCliente
