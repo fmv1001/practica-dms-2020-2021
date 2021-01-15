@@ -1,9 +1,10 @@
 """ Client configuration classes."""
 
-from .actualizarSensores import ActualizarSensores
-from .consultarSensores import ConsultarSensores
-from .crearUsuario import CrearUsuario
-from .logoutService import Exit
 from .menuOpciones import MenuDeOpciones
 from .menuPrincipal import MenuLogPrincipal
-from .modificarPermisos import ModificarPermisos
+from .actualizarSensoresPresentacion import ActualizarSensoresPresentacion
+from .modificarPermisosPresentacion import ModificarPermisosPresentacion
+from .consultarSensoresPresentacion import ConsultarSensoresPresentacion
+from .cambiarReglasPresentacion import CambiarReglasPresentacion
+#from .crearUsuarioPresentacion import crearUsuarioPresentacion
+

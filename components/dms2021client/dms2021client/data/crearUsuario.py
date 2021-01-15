@@ -1,4 +1,3 @@
-from getpass import getpass
 from dms2021client.data.rest import AuthService
 
 class CrearUsuario():
@@ -12,12 +11,14 @@ class CrearUsuario():
         self.__username = username
         self.__auth_service = auth_service
 
-    def creacionUsuario(self):
+    def creacionUsuario(self, username, password):
         """ Método que pide por paramatró nombre y contraseña para la creación de un usuario."""
 
-        print("\n_________________________________________________\n")
-        print("\nNEW USER -->")
-        username: str = input('\tUsername: ')
-        password: str = getpass('\tPassword: ')
-        self.__auth_service.newUser(self.__username, username, password, self.__session_id)
+        status = self.__auth_service.newUser(self.__username, username, password, self.__session_id)
         
+        if status == 200:
+            salida = True
+        else:
+            salida = False
+
+        return salida

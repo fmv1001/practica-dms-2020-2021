@@ -1,6 +1,7 @@
 from dms2021client.data.rest import AuthService
+from dms2021client.data import modificarPermisos
 
-class ModificarPermisos():
+class ModificarPermisosPresentacion():
 
     __session_id: str
     __username: str
@@ -24,13 +25,14 @@ class ModificarPermisos():
         print("\tViewReports = 5")
         print("\n")
 
-        username: str = input('\tNombre de ususario a cambiar los derechos: ')
-        right: int = int(input("\tDerecho: "))
-
-        dar_quitar: int = int(input("\tDar derecho [1] o quitar derecho [2]: "))
-        if dar_quitar == 1:
-            self.__auth_service.dar_quitar_permisos(self.__username, username, right, self.__session_id, 'POST')
-        else:
-            self.__auth_service.dar_quitar_permisos(self.__username, username, right, self.__session_id, 'DELETE')
-        return 0
+        respuesta = modificarPermisos.ModificarPermisos.modificarPermisos(self, self.__auth_service, self.__username, self.__session_id)
         
+        if respuesta == True:
+            print("\t\t\x1b[1;32m" + "¡¡El cambio de los permisos se hizo con éxito!!" + "\033[0;m")
+        else:
+            print("Permiso no modificado ha ocurrido un error")
+
+        return
+
+
+

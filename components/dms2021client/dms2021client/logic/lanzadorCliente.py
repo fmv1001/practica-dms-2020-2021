@@ -6,8 +6,8 @@ from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest import SensorService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from dms2021client.presentation import menuOpciones, menuPrincipal, crearUsuario, modificarPermisos, consultarSensores,actualizarSensores
-from dms2021client.presentation.logoutService import  Exit
+from dms2021client.presentation import menuOpciones, menuPrincipal, ModificarPermisosPresentacion, actualizarSensoresPresentacion, consultarSensoresPresentacion, cambiarReglasPresentacion, crearUsuarioPresentacion
+from dms2021client.data.logoutService import  Exit
 
 class LanzadorCliente():
 
@@ -29,7 +29,6 @@ class LanzadorCliente():
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
         self.__sensor1_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         self.__sensor2_service = SensorService(self.__cfg.get_sensor2_service_host(),self.__cfg.get_sensor2_service_port())
-        actualizacion = actualizarSensores.ActualizarSensores(self.__sensor1_service)
 
         while True:
             menu_principal = menuPrincipal.MenuLogPrincipal()
@@ -46,18 +45,20 @@ class LanzadorCliente():
                         if salir_programa.exitPagina() == -1:
                             break
                     elif respuesta == 1:
-                        crear_usuario = crearUsuario.CrearUsuario(self.__session_id, self.__username, self.__auth_service)
+                        crear_usuario = crearUsuarioPresentacion.CrearUsuarioPresentacion(self.__session_id, self.__username, self.__auth_service)
                         crear_usuario.creacionUsuario()
                     elif respuesta == 2:
-                        modificar_permisos = modificarPermisos.ModificarPermisos(self.__session_id, self.__username, self.__auth_service)
+                        modificar_permisos = ModificarPermisosPresentacion(self.__session_id, self.__username, self.__auth_service)
                         modificar_permisos.modificarPermisos()
                     elif respuesta == 3:
-                        consulta = consultarSensores.ConsultarSensores(self.__sensor1_service)
+                        consulta = consultarSensoresPresentacion.ConsultarSensoresPresentacion(self.__sensor1_service)
                         consulta.consultarSensoresExistentes()
                     elif respuesta == 4:
+                        actualizacion = actualizarSensoresPresentacion.ActualizarSensoresPresentacion(self.__sensor1_service)
                         actualizacion.actualizarSensoresExistentes()
                     elif respuesta == 5:
-                        actualizacion.cambiarreglas()
+                        reglas = cambiarReglasPresentacion.CambiarReglasPresentacion(self.__sensor1_service)
+                        reglas.cambiarreglas()
                     print("\t_________________________________________________")
                     input('\n\t\tIntro para continuar ...')
 
