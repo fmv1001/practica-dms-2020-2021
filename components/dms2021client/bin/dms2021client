@@ -1,2 +1,2 @@
 """ Client configuration classes."""
-from dms2021client.logic.lanzadorCliente import LanzadorCliente
+from dms2021client.presentation.interfazPorMenues import InterfazPorMenues

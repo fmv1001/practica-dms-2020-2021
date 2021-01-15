@@ -9,7 +9,7 @@ from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedErr
 from dms2021client.presentation import menuOpciones, menuPrincipal, ModificarPermisosPresentacion, actualizarSensoresPresentacion, consultarSensoresPresentacion, cambiarReglasPresentacion, crearUsuarioPresentacion
 from dms2021client.data.logoutService import  Exit
 
-class LanzadorCliente():
+class InterfazPorMenues():
 
     __session_id: str
     __username: str
