@@ -18,5 +18,3 @@ class ActualizarSensores():
             dict_respuesta = {}
 
         return dict_respuesta
-
-    
