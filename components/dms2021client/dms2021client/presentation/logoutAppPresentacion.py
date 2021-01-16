@@ -1,7 +1,8 @@
 import time
 from dms2021client.data.rest import AuthService
+from dms2021client.data.logoutApp import Exit
 
-class Exit():
+class ExitPresentacion():
 
     __session_id: str
     __auth_service: AuthService
@@ -14,10 +15,10 @@ class Exit():
         """ Permite al usuario hacer un LogOut. """
 
         try:
-            self.__auth_service.logout(self.__session_id)
+            Exit(self.__session_id, self.__auth_service).exitPagina()
             print("\x1b[1;31m" + "+----------------------------+")
             print("| Logged out successfully    |")
-            print("+----------------------------+" + '\033[0;m')
+            print("+----------------------------+" + "\033[0;m")
             time.sleep(2)
             return -1
         except Exception as ex:

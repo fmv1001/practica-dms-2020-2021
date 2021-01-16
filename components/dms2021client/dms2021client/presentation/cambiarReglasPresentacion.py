@@ -1,14 +1,13 @@
 from dms2021client.data.rest import SensorService
 from dms2021client.data import cambiarReglas
+from dms2021client.presentation.visualizacionSensor import sensorSTR
 
 class CambiarReglasPresentacion():
 
     __sensor1_service: SensorService
 
     def __init__(self, sensor1_service: SensorService):
-        self.__sensor1_service = sensor1_service   
-    
-    
+        self.__sensor1_service = sensor1_service
     
     def cambiarreglas(self):
         """ Método que actualiza las reglas de los sensores. """
@@ -31,8 +30,7 @@ class CambiarReglasPresentacion():
         else: 
             print("\t\t\x1b[1;32m" + "¡¡Regla cambiada con éxito!!" + "\033[0;m")
             print("\t\t - Ahora la respuesta del sensor sera la siguiente:")
-            for i in dict_sensor.keys():
-                print("\t\t\t",i,"\t\t",dict_sensor[i])
+            sensorSTR(dict_sensor).mostrarSesnor()
   
 
         return 0

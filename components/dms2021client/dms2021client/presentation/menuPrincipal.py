@@ -1,21 +1,28 @@
 import os
+class MenuPrincipal():
 
-class MenuLogPrincipal():
-    
     def __init__(self):
-        pass
+        return
 
-    def menuLogInOrExit(self):
-        """Metodo principal en el que se le da la posibilidad al usuario de logearse o salir. """
-
+    def menu(self):
         os.system("clear")
-        print("Selecciona la opción que desees, logearte con un usuario o salir del programa -->")
-        print("\t1-Log In")
-        print("\t2-Salir del programa\n")
-        salida: int = 0
-        while(salida < 1 or salida > 2):
-            salida: int = int(input("\tEscoja la opción que desee: "))
-            if(salida >2 or salida < 1):
-                print("ERROR --> Porfavor introduce una opción de entre las que se encuentren disponibles.")
+        print("\x1b[1;36m" + "+-----------------------------------------------------------------------+")
+        print("| MENU PRINCIPAL -->                                      appGuilleFran"+ chr(174)+"|")
+        print("+-----------------------------------------------------------------------+")
+        print("|        1.Crear un usuario.                                            |")
+        print("|        2.Cambiar permisos.                                            |")
+        print("|        3.Obtener los resultados de un sensor.                         |")
+        print("|        4.Actualizar los resultados de un sensor.                      |")
+        print("|        5.Cambiar las reglas de un sensor.                             |")
+        print("|        6...LogOut...                                                  |")
+        print("|        0...LogOut and exit...                                         |")
+        print("+-----------------------------------------------------------------------+")
+        print('\033[0;m' + "\n")
 
-        return salida
+        opcion = -1
+        while(opcion >6 or opcion < 0):
+            opcion  = int(input('\033[1;37m' + "\tIntroduce la opcion a la que desees acceder: " + '\033[0;m'))
+            if(opcion >6 or opcion < 0):
+                print("\x1b[1;33m" + "ERROR --> " + '\033[0;m' + "Porfavor introduce una opción de entre las que se encuentren disponibles.")
+
+        return opcion
