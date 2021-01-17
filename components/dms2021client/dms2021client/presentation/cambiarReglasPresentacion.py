@@ -2,7 +2,8 @@
 """
 
 from dms2021client.data.rest import SensorService
-from dms2021client.data import cambiarReglas
+from dms2021client.data.rest import AuthService
+from dms2021client.data.cambiarReglas import CambiarReglas
 from dms2021client.presentation.visualizacionSensor import sensorSTR
 
 class CambiarReglasPresentacion():
@@ -10,12 +11,16 @@ class CambiarReglasPresentacion():
     """
 
     __sensor1_service: SensorService
+    __auth_service: AuthService
+    __username: str
 
-    def __init__(self, sensor1_service: SensorService):
+    def __init__(self, sensor1_service: SensorService, auth_service: AuthService, username: str):
         """ Initialization/constructor method.
         """
 
         self.__sensor1_service = sensor1_service
+        self.__auth_service = auth_service
+        self.__username = username
 
     def cambiarreglas(self):
         """ Método que actualiza las reglas de los sensores. """
@@ -31,7 +36,7 @@ class CambiarReglasPresentacion():
 
 
         print("\n\t\t...Actualizando reglas...\n")
-        dict_sensor = cambiarReglas.CambiarReglas(self.__sensor1_service).cambiarreglas(regla, tipo_sensor)
+        dict_sensor = CambiarReglas(self.__sensor1_service, self.__auth_service).cambiarreglas(regla, tipo_sensor, self.__username)
 
         if len(dict_sensor.keys()) == 0:
             print("Erorr")

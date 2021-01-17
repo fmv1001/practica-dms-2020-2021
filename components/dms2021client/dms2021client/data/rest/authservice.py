@@ -194,3 +194,19 @@ class AuthService():
         else:
             print("Error....", response.status)
             return response.status
+
+    def has_right(self, usernameAdmin: str, right: str):
+        """ Comprobamos que el usuario tenga derechos.
+        ---
+        Parameters:
+            - usernameAdmin: Usuario admin que realiza la operacion.
+        Returns:
+            Status of the action
+        Throws:
+            - UnauthorizedError: If the provided session is incorrect or closed.
+        """
+
+        connection: HTTPConnection = self.__get_connection()
+        connection.request('GET', '/users/' + usernameAdmin + '/rights/' + right)
+        response: HTTPResponse = connection.getresponse()
+        return response.status

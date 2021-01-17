@@ -75,7 +75,7 @@ class InterfazPorMenues():
                         actualizacion = ActualizarSensoresPresentacion(self.__sensor1_service)
                         actualizacion.actualizarSensoresExistentes()
                     elif respuesta == 5:
-                        reglas = CambiarReglasPresentacion(self.__sensor1_service)
+                        reglas = CambiarReglasPresentacion(self.__sensor1_service, self.__auth_service, self.__username)
                         reglas.cambiarreglas()
                     elif respuesta ==6:
                         logout = ExitPresentacion(self.__session_id, self.__auth_service)
