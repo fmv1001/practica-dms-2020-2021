@@ -91,13 +91,6 @@ Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las 
 
   ## Patrones de diseno
 
-- Principios SOLID:
-  - Single responsibility: La división del programa nos permite cambiar las partes del código que queramos sin afectar a otras.
-  - Open/Close: el código está pensado para que si quieremos extender este se pueda hacer utilizando herencia sin modificar otras clases.
-  - Liskov substitution: 
-  - Interface segregation: 
-  - Dependency inversion: 
-
 - Fachada: debido a que dentro del cliente utilizamos una interfaz para ocultar toda la complegidad del la comunicacion del cliente con los demas servicios, consideramos que hemos aplicado el metodo de fachada.
 - Singleton: authservice y sensorservice son instancioados unicamente en `interfazpormenues` teniendo desde ese archivo un acceso global a estos. Al igual que con las clases de la carpeta de data y de presentacion.
 - Metodo Plantilla: los sensores, tienen una parte invariante, que es la clase abstracta (`sensorABS`) y deja la parte variable para las clases concretas del sensor (`sensorMem` y `sensorFile`).
