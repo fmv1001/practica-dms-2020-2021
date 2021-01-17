@@ -41,4 +41,5 @@ class CambiarReglas():
             else:
                 print("ERROR: ....", status)
                 raise Exception
+        return {}
     
