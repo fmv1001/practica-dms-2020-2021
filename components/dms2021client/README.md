@@ -100,11 +100,8 @@ Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las 
 
 - Fachada: debido a que dentro del cliente utilizamos una interfaz para ocultar toda la complegidad del la comunicacion del cliente con los demas servicios, consideramos que hemos aplicado el metodo de fachada.
 - Singleton: authservice y sensorservice son instancioados unicamente en `interfazpormenues` teniendo desde ese archivo un acceso global a estos. Al igual que con las clases de la carpeta de data y de presentacion.
-- 
-
-
-
-
+- Metodo Plantilla: los sensores, tienen una parte invariante, que es la clase abstracta (`sensorABS`) y deja la parte variable para las clases concretas del sensor (`sensorMem` y `sensorFile`).
+- Estado: el programa va alternando entre las diferentes opciones del menu, cambiando en tiempo de ejecucion a diferentes estados (las diferentes opciones del menu) y por ello se entiende el uso de este patron.
 
   ## Code structure
 
