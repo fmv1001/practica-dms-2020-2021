@@ -52,33 +52,32 @@ class InterfazPorMenues():
 
             if salida == 1:
                 self.__session_id, self.__username = LoginAppPresentacion(self.__auth_service).login()
+                logout = ExitPresentacion(self.__session_id, self.__auth_service)
+                crear_usuario = CrearUsuarioPresentacion(self.__session_id, self.__username, self.__auth_service)
+                modificar_permisos = ModificarPermisosPresentacion(self.__session_id, self.__username, self.__auth_service)
+                consulta = ConsultarSensoresPresentacion(self.__sensor1_service)
+                actualizacion = ActualizarSensoresPresentacion(self.__sensor1_service)
+                reglas = CambiarReglasPresentacion(self.__sensor1_service, self.__auth_service, self.__username)
+
                 while True:
                     salida_pantalla = MenuPrincipal()
                     respuesta = salida_pantalla.menu()
-
                     if respuesta == 0:
-                        logout = ExitPresentacion(self.__session_id, self.__auth_service)
                         logout.exitPagina()
                         salir = 1
                         salida = 2
                         break
                     elif respuesta == 1:
-                        crear_usuario = CrearUsuarioPresentacion(self.__session_id, self.__username, self.__auth_service)
                         crear_usuario.creacionUsuario()
                     elif respuesta == 2:
-                        modificar_permisos = ModificarPermisosPresentacion(self.__session_id, self.__username, self.__auth_service)
                         modificar_permisos.modificarPermisos()
                     elif respuesta == 3:
-                        consulta = ConsultarSensoresPresentacion(self.__sensor1_service)
                         consulta.consultarSensoresExistentes()
                     elif respuesta == 4:
-                        actualizacion = ActualizarSensoresPresentacion(self.__sensor1_service)
                         actualizacion.actualizarSensoresExistentes()
                     elif respuesta == 5:
-                        reglas = CambiarReglasPresentacion(self.__sensor1_service, self.__auth_service, self.__username)
                         reglas.cambiarreglas()
                     elif respuesta ==6:
-                        logout = ExitPresentacion(self.__session_id, self.__auth_service)
                         if logout.exitPagina() == -1:
                             break
                     print("\t_________________________________________________")
