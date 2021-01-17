@@ -70,18 +70,18 @@ This service exposes a REST API so other services/applications can interact with
   - Diseno basado en el modelo-vista-controlador (MVC)
   
     La arquitectura del servicio del sensor se divide en 3 carpetas.
-    - Una primera carpeta de datos (data) que contine la configuracion del servicio del 
+    - Una primera carpeta de datos (`data`) que contine la configuracion del servicio del 
       sensor en la carpeta config y la carpeta de la case de datos (db) que no es usada 
       debido a que creamos los sensores como instancias de objetos y obtenemos sus datos 
       con sus propios metodos y no mediante una bases de datos.
 
-    - Una carpeta llamada logic que contiene la logica de negocio del sensor.
+    - Una carpeta llamada `logic` que contiene la logica de negocio del sensor.
       Dentro de ella encontramos los sensores sensor1, sensor2.
       Estos implementan algun tipo de monitorizacion del sistema.
       El sensor1 calcula la memoria RAM usuada, la memoria swap, el disco usado en ese momento y el porcentaje de CPU. Todas estas caracteristicas del sistema en el momento que se instancia el objeto y esta podra ser actualizada. Tambien encontramos el fichero sensorAbs que implementa la clase
       abstracta de la que heredan los sensores del sistema marcando su estructura interna minima.
 
-    - Una ultima carpeta que implementa la capa de presentacion (presentation). Dentro 
+    - Una ultima carpeta que implementa la capa de presentacion (`presentation`). Dentro 
       de ella encontramos la carpeta rest que contiene el archivo sensorrest que 
       implementa el API Rest del servicio sensor. Esta implementacion permite la conexion 
       con los demas servicios del sistema.
@@ -99,13 +99,13 @@ o verifiquemos la existencia y caracterísitcas de un archivo.
 
   ## Code structure
 
-- bin/: En este apartado instanciamos las clases necesarias y agregamos nuestras especificaciones REST.
-- dms2021sensor/: Paquete principal
-  - data/: Apartados de datos del programa.
-    - config/: Aquí tenemos nuestra configuración del sensor.
-    - db/: Base de datos del sensor (No implementada)
-  - logic/: Apartado en el que encontramos la implementación de los sensores y nuestra interfaz del sensor.
-  - presentation/: 
-    - rest/: Este es el apartado donde se genera una respuesta al sensor en base a las solicitudes entrantes.
+- `bin`/: En este apartado instanciamos las clases necesarias y agregamos nuestras especificaciones REST.
+- `dms2021sensor`/: Paquete principal
+  - `data`/: Apartados de datos del programa.
+    - `config`/: Aquí tenemos nuestra configuración del sensor.
+    - `db`/: Base de datos del sensor (No implementada)
+  - `logic`/: Apartado en el que encontramos la implementación de los sensores y nuestra interfaz del sensor.
+  - `presentation`/: 
+    - `rest`/: Este es el apartado donde se genera una respuesta al sensor en base a las solicitudes entrantes.
 
 
