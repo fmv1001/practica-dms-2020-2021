@@ -77,7 +77,23 @@ class ClientConfiguration(Configuration):
         auth_service_value: dict = self.__get_auth_service_value()
         return int(str(auth_service_value['port']))
 
-    def __get_sensor_service_value(self) -> dict:
+    def __get_sensor1_service_value(self) -> dict:
+        """ Gets the value of the auth_service configuration dictionary.
+        ---
+        Returns:
+            A dictionary with the authentication service configured parameters.
+        """
+        sensor_service_value: ConfigurationValueType = self.get_value(
+            'sensors'
+        )
+        if not isinstance(sensor_service_value, dict):
+            raise TypeError(
+                'Configuration parameter auth_service is expected to be a dictionary. Received: '
+                + str(type(sensor_service_value))
+            )
+        return sensor_service_value
+
+    def __get_sensor2_service_value(self) -> dict:
         """ Gets the value of the auth_service configuration dictionary.
         ---
         Returns:
@@ -102,7 +118,7 @@ class ClientConfiguration(Configuration):
             - TypeError: if the authservice parameter is not a dictionary.
         """
 
-        sensor_service_value: dict = self.__get_sensor_service_value()
+        sensor_service_value: dict = self.__get_sensor1_service_value()
         dict_aux: dict = sensor_service_value['sensor1']
 
         return str(dict_aux['host'])
@@ -116,7 +132,7 @@ class ClientConfiguration(Configuration):
             - TypeError: if the authservice parameter is not a dictionary.
         """
 
-        sensor_service_value: dict = self.__get_sensor_service_value()
+        sensor_service_value: dict = self.__get_sensor1_service_value()
         dict_aux: dict = sensor_service_value['sensor1']
 
         return int(str(dict_aux['port']))
@@ -130,7 +146,7 @@ class ClientConfiguration(Configuration):
             - TypeError: if the authservice parameter is not a dictionary.
         """
 
-        sensor_service_value: dict = self.__get_sensor_service_value()
+        sensor_service_value: dict = self.__get_sensor2_service_value()
         dict_aux: dict = sensor_service_value['sensor2']
 
         return str(dict_aux['host'])
@@ -144,7 +160,7 @@ class ClientConfiguration(Configuration):
             - TypeError: if the authservice parameter is not a dictionary.
         """
 
-        sensor_service_value: dict = self.__get_sensor_service_value()
+        sensor_service_value: dict = self.__get_sensor2_service_value()
         dict_aux: dict = sensor_service_value['sensor2']
 
         return int(str(dict_aux['port']))
