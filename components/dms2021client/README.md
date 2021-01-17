@@ -36,10 +36,20 @@ Este servicio nos permite ejecutar la aplicacion en la que podemos realizar las 
 - `Crear usuarios`: Si el usuario con el que se ha hecho el login tiene el permiso `AdminUsers`, podra crear usuarios que seran anadidos al sistema. Este usuario se inicia sin permisos y es anadido en la base de datos del servicio de autentificacion. Las credenciales del nuevo usuario se pediran por pantalla.
 - `Cambiar permisos de un usuario`: Si el usuario con el que se ha hecho el login tiene el permiso `AdminRights`, podra cambiar los permisos de un usuario que sera modificado en el sistema. Los cambios son anadidos en la base de datos del servicio de autentificacion. Las credenciales del usuario a cambiar los permisos y el permiso a modificar se piden por pantalla.
 - `Obtener los resultados de un sensor`: Si escogemos esta opcion se mostrara un menu con los diferentes sensores de los que dispone el sistema y podremos elegir de que sensor queremos obtener su valor, esta opcion se pide por pantalla. 
-  - Si escogemos el `sensor de memoria RAM`, nos muestra el valor de la memoria RAM usuada del sistema. 
-  - Los demas sensores nos mostraran un mensaje indicando que no estan implementados en el sistema. Seran implementados en proximas versiones.
-- `Actualizar los resultados de un sensor`: se actualizara el valor del sensor deseado (escogido por pantalla). Como se ha mencionado, solo esta implementado el sensor de memoria RAM, los demas sensores no estan disponibles en esta version.
-- `SALIR`: se cerrara la sesion del usuario actual y con ello el programa.
+  - Si escogemos el `sensor del sistema`, nos muestrara las reglas (si estan habilitadas) que monitoriza este sensor:
+    - La memoria RAM usada.
+    - La memorio del disco usada.
+    - La memoria SWAP usada.
+    - El porcentaje de CPU usado.
+  - Si escogemos el `sensor de un directorio`, nos muestrara las reglas (si estan habilitadas) que monitoriza este sensor:
+    - La ruta del directorio (Esta monitorizando `/home`)
+    - Si existe o no el directorio monitorizado
+    - La memoria que ocupa el archivo en el disco.
+    - La fecha de modificacion mas reciente.
+- `Actualizar los resultados de un sensor`: se actualizara el valor del sensor deseado (escogido por pantalla).
+- `Cambiar las reglas de un sensor`: con esta opcion podremos cambiar las reglas de monitorizacion de cada uno de los sensores, esto se podra hacer si disponemos de los permisos necesarios, en este caso `AdminRules`.
+- `LogOut`: Permite que cerremos la sesion del usuario con el que hemos accedido, e iremos a la pantalla de inicio.
+- `LogOut and exit`: se cerrara la sesion del usuario actual y con ello el programa.
 
 ## Arquitectura y diseno del cliente
 
