@@ -1,20 +1,32 @@
+""" CrearUsuarioPresentacion class module.
+"""
+
 from getpass import getpass
 from dms2021client.data.rest import AuthService
 from dms2021client.data import crearUsuario
 
 class CrearUsuarioPresentacion():
+    """ Clase responsable de la interfaz de crear un usuario
+    """
 
     __session_id: str
     __username: str
     __auth_service: AuthService
 
     def __init__(self, session_id: str, username: str, auth_service: AuthService):
+        """ Initialization/constructor method.
+        """
+
         self.__session_id = session_id
         self.__username = username
         self.__auth_service = auth_service
 
     def creacionUsuario(self):
-        """ Método que pide por paramatró nombre y contraseña para la creación de un usuario."""
+        """ Método que pide por paramatró nombre y contraseña para la creación de un usuario.
+        ---
+        Returns:
+            True si el usuario se crea con exito, False si no
+        """
 
         print("\t\n_________________________________________________\n")
         print("\t\nNEW USER -->")
@@ -25,5 +37,3 @@ class CrearUsuarioPresentacion():
             print("\t\t\x1b[1;32m" + "¡¡¡El usuario se ha creado con exito!!!" + "\033[0;m")
         else:
             print("\t\tError")
-        
-        return 0

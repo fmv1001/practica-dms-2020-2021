@@ -1,14 +1,22 @@
+""" CambiarReglasPresentacion class module.
+"""
+
 from dms2021client.data.rest import SensorService
 from dms2021client.data import cambiarReglas
 from dms2021client.presentation.visualizacionSensor import sensorSTR
 
 class CambiarReglasPresentacion():
+    """ Clase responsable de la interfaz correspondiente a cambiar las reglas de un sensor
+    """
 
     __sensor1_service: SensorService
 
     def __init__(self, sensor1_service: SensorService):
+        """ Initialization/constructor method.
+        """
+
         self.__sensor1_service = sensor1_service
-    
+
     def cambiarreglas(self):
         """ Método que actualiza las reglas de los sensores. """
 
@@ -27,16 +35,19 @@ class CambiarReglasPresentacion():
 
         if len(dict_sensor.keys()) == 0:
             print("Erorr")
-        else: 
+        else:
             print("\t\t\x1b[1;32m" + "¡¡Regla cambiada con éxito!!" + "\033[0;m")
             print("\t\t - Ahora la respuesta del sensor sera la siguiente:")
             sensorSTR(dict_sensor).mostrarSesnor()
-  
-
-        return 0
 
     def __menureglas(self, sensor:str):
-        """ MUestra las reglas que se puedan actualizar y deja elegir al usuario. """
+        """ Muestra las reglas que se puedan actualizar y deja elegir al usuario.
+        ---
+        Parameters:
+            - sensor: tipo sensor
+        Returns:
+            Regla escogida
+        """
 
         if int(sensor)==1:
             print("\n\t_________________________________________________\n")

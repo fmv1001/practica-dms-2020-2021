@@ -1,12 +1,20 @@
+""" ConsultarSensoresPresentacion class module.
+"""
+
 from dms2021client.data.rest import SensorService
 from dms2021client.data.consultarSensores import ConsultarSensores
 from dms2021client.presentation.visualizacionSensor import sensorSTR
 
 class ConsultarSensoresPresentacion():
+    """ Clase responsable de la interfaz de consultar los sensores
+    """
 
     __sensor1_service: SensorService
 
     def __init__(self, sensor1_service: SensorService):
+        """ Initialization/constructor method.
+        """
+
         self.__sensor1_service = sensor1_service
 
     def consultarSensoresExistentes(self):
@@ -29,5 +37,3 @@ class ConsultarSensoresPresentacion():
             print("\t\t\x1b[1;32m" + "¡¡Sensor consultado con éxito!!" + "\033[0;m")
             print("\t\t - Respuesta del sensor:")
             sensorSTR(dict_sensor).mostrarSesnor()
-
-        return 0

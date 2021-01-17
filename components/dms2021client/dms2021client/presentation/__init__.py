@@ -1,4 +1,4 @@
-""" Client configuration classes."""
+""" Client presentation classes."""
 
 from .menuPrincipal import MenuPrincipal
 from .menuInicial import MenuLogInicial

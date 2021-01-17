@@ -21,6 +21,7 @@ class AuthService():
             - host: The authentication service host string.
             - port: The authentication service port number.
         """
+
         self.__host: str = host
         self.__port: int = port
 
@@ -30,6 +31,7 @@ class AuthService():
         Returns:
             The connection object.
         """
+
         return HTTPConnection(self.__host, self.__port)
 
     def is_running(self) -> bool:
@@ -38,6 +40,7 @@ class AuthService():
         Returns:
             True if the authentication service could be contacted successfully; false otherwise.
         """
+
         try:
             connection: HTTPConnection = self.__get_connection()
             connection.request('GET', '/')
@@ -62,6 +65,7 @@ class AuthService():
             - InvalidCredentialsError: If the credentials provided are not correct.
             - HTTPException: On an unhandled 500 error.
         """
+
         form: str = urlencode({'username': username, 'password': password})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
@@ -88,6 +92,7 @@ class AuthService():
             - UnauthorizedError: If the provided session is incorrect or closed.
             - HTTPException: On an unhandled 500 error.
         """
+
         form: str = urlencode({'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
@@ -104,6 +109,19 @@ class AuthService():
             raise HTTPException('Server error')
 
     def newUser(self, usernameAdmin: str,username: str, password: str, session_id: str):
+        """ Crea un nuevo usurio en el sistema.
+        ---
+        Parameters:
+            - usernameAdmin: Usuario admin que realiza la operacion.
+            - username: nombre del nuevo usuario
+            - password: contrasena del nuevo usuario
+            - session_id: id de la session actual
+        Returns:
+            Status of the action
+        Throws:
+            - UnauthorizedError: If the provided session is incorrect or closed.
+        """
+
         form: str = urlencode({'username': username, 'password': password, 'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
@@ -122,11 +140,26 @@ class AuthService():
         elif response.status == 401:
             raise UnauthorizedError()
         else:
-            print("Otro ERROR: ....", response.status)
-            return
-        return
+            print("ERROR: ....", response.status)
+            return response.status
+
+        return response.status
 
     def dar_quitar_permisos(self, usernameAdmin: str, usernameChanges: str, rightChanges: int, session_id: str, dar_quitar:str):
+        """ modifica los permisos de un usurio en el sistema.
+        ---
+        Parameters:
+            - usernameAdmin: Usuario admin que realiza la operacion.
+            - username: nombre del usuario a modificar permisos
+            - password: contrasena del usuario a modificar permisos
+            - session_id: id de la session actual
+        Returns:
+            Status of the action
+        Throws:
+            - UnauthorizedError: If the provided session is incorrect or closed.
+            - HTTPException: On an unhandled 500 error.
+        """
+
         form: str = urlencode({'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
@@ -155,7 +188,7 @@ class AuthService():
                 raise HTTPException('Server error')
             else:
                 print("ERROR, no se de el permiso correctamente por el error --> ", response.status)
-                return response.status 
+                return response.status
         elif response.status == 401:
             raise UnauthorizedError()
         else:

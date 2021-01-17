@@ -1,9 +1,18 @@
-from .sensorAbs import Sensor
+""" Sensor 2 class module.
+"""
+
 import subprocess
+from .sensorAbs import Sensor
+
 
 class SensorFile(Sensor):
+    """ Clase responsable del sensor 2
+    """
 
     def __init__(self, ruta):
+        """ Initialization/constructor method.
+        """
+
         self.__reglas = [1,1,1,1]
         self.__ruta = ruta
         self.__valores = {}
@@ -12,9 +21,13 @@ class SensorFile(Sensor):
         self.__fechaMod = '-/-/-'
         self.__monitorizar()
         self.__monitorizar_reglas()
+
         return
 
     def __monitorizar(self):
+        """ Monitoriza las reglas del sensor2 y las guarda en la varible correspondiente
+        """
+
         #Regla 1
         try:
             #Regla 2
@@ -37,15 +50,25 @@ class SensorFile(Sensor):
             self.__fechaMod = '-/-/-'
             return
         return
-    
+
     def __rellenar(self):
+        """ Guarda el valor de las reglas del sensor en un diccionario
+        """
+
         self.__valores["Ruta"] = self.__ruta
         self.__valores["Exist"] = self.__esxist
         self.__valores["MEM"] = self.__memoriaArchivo
         self.__valores["FECHAMOD"] = self.__fechaMod
+
         return
 
     def cambiar_reglas(self, regla):
+        """ Monitoriza las reglas del sensor2
+        ---
+        Parameters:
+            - regla: regla que se desea cambiar
+        """
+
         if int(regla) > 4 or int(regla) < 1:
             raise Exception
         if self.__reglas[int(regla)-1] == 1:
@@ -53,9 +76,13 @@ class SensorFile(Sensor):
         else:
             self.__reglas[int(regla)-1] = 1
         self.__monitorizar_reglas()
+
         return
-    
+
     def __monitorizar_reglas(self):
+        """ Elimna del diccionario las entradas que no son visibles al usuario
+        """
+
         self.__rellenar()
         eliminar_regla = []
         for i,key in enumerate(self.__valores.keys()):
@@ -63,15 +90,23 @@ class SensorFile(Sensor):
                 eliminar_regla.append(key)
         for key in eliminar_regla:
             self.__valores.pop(key)
+
         return
-    
-    def obtenerSensor(self): # -> dict
+
+    def obtenerSensor(self):
+        """ Devuelve el diccionario con los valores del sensor
+        ---
+        Returns:
+            Diccionario con los valores del sensor
+        """
+
         return self.__valores
 
     def actualizarSensor(self):
+        """ Actualiza los valores del sensor
+        """
+
         self.__monitorizar()
         self.__monitorizar_reglas()
-        return
 
-    def __str__(self):
-        return 'Memoria usada del archivo' + str(self.__ruta) + ': ' + str(self.__memoriaArchivo) + 'MB'
+        return

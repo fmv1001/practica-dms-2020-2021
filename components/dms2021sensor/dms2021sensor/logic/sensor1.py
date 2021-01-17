@@ -1,10 +1,17 @@
+""" Sensor 1 class module.
+"""
+import subprocess
 from psutil import disk_usage, cpu_percent
 from .sensorAbs import Sensor
-import subprocess
 
 class SensorMem(Sensor):
+    """ Clase responsable del sensor 1
+    """
 
     def __init__(self):
+        """ Initialization/constructor method.
+        """
+
         self.__reglas = [1,0,1,0]
         self.__valores = {}
         self.__memUsada = '0'
@@ -13,9 +20,13 @@ class SensorMem(Sensor):
         self.__CPU = '0'
         self.__monitorizar()
         self.__monitorizar_reglas()
+
         return
 
     def __monitorizar(self):
+        """ Monitoriza las reglas del sensor1 y las guarda en la varible correspondiente
+        """
+
         #Regla 1
         result1 = subprocess.getoutput('grep MemTotal /proc/meminfo | awk \' {print $2 }\' ')
         result2 = subprocess.getoutput('grep MemAvailable /proc/meminfo | awk \' {print $2 }\' ')
@@ -37,15 +48,24 @@ class SensorMem(Sensor):
         self.__CPU = cpu_percent(interval=4)
 
         return
-    
+
     def __rellenar(self):
+        """ Guarda el valor de las reglas del sensor en un diccionario
+        """
+
         self.__valores["RAM"] = self.__memUsada
         self.__valores["SWAP"] = self.__swap
         self.__valores["DISK"] = self.__disk
         self.__valores["CPU"] = self.__CPU
+
         return
 
     def cambiar_reglas(self, regla):
+        """ Monitoriza las reglas del sensor1
+        ---
+        Parameters:
+            - regla: regla que se desea cambiar
+        """
         if int(regla) > 4 or int(regla) < 1:
             raise Exception
         if self.__reglas[int(regla)-1] == 1:
@@ -54,8 +74,11 @@ class SensorMem(Sensor):
             self.__reglas[int(regla)-1] = 1
         self.__monitorizar_reglas()
         return
-    
+
     def __monitorizar_reglas(self):
+        """ Elimna del diccionario las entradas que no son visibles al usuario
+        """
+
         self.__rellenar()
         eliminar_regla = []
         for i,key in enumerate(self.__valores.keys()):
@@ -63,15 +86,23 @@ class SensorMem(Sensor):
                 eliminar_regla.append(key)
         for key in eliminar_regla:
             self.__valores.pop(key)
+
         return
-    
-    def obtenerSensor(self): # -> dict
+
+    def obtenerSensor(self):
+        """ Devuelve el diccionario con los valores del sensor
+        ---
+        Returns:
+            Diccionario con los valores del sensor
+        """
+
         return self.__valores
 
     def actualizarSensor(self):
+        """ Actualiza los valores del sensor
+        """
+
         self.__monitorizar()
         self.__monitorizar_reglas()
-        return
 
-    def __str__(self):
-        return 'Memoria usada del sistema: ' + str(self.obtenerSensor()) + '%'
+        return

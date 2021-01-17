@@ -54,7 +54,7 @@ class SensorService():
         """ Proporciona la salidaa de un sensor indicado.
         ---
         Returns:
-            Tipo de sensor.
+            Diccionario con el valor de las reglas del sensor.
         """
 
         connection: HTTPConnection = self.__get_connection()
@@ -74,7 +74,7 @@ class SensorService():
         """ Actualiza el sensor indicado.
         ---
         Returns:
-            Tipo de sensor.
+            Diccionario con el valor de las reglas del sensor.
         """
         connection: HTTPConnection = self.__get_connection()
         connection.request('POST', '/actualizarsensor/' + sensor_type)
@@ -93,7 +93,7 @@ class SensorService():
         """ Actualiza las reglas del sensor indicado.
         ---
         Returns:
-            Tipo de sensor.
+            Diccionario con el valor de las reglas del sensor.
         """
         connection: HTTPConnection = self.__get_connection()
         connection.request('POST', '/actualizarreglas/' + sensor_type + '/reglas/' + regla)

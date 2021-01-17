@@ -1,17 +1,29 @@
-import time, os
+""" LoginAppPresentacion class module.
+"""
+
+import time
+import os
 from getpass import getpass
 from dms2021client.data.loginApp import LoginApp
 from dms2021client.data.rest.exc import InvalidCredentialsError
 
-
 class LoginAppPresentacion():
+    """ Clase responsable de la interfaz correspondiente al login
+    """
 
     def __init__(self, auth_service):
+        """ Initialization/constructor method.
+        """
+
         self.__auth_service = auth_service
         return
-    
+
     def login(self):
-        """ Metodo que permite al usuario logearse. """
+        """ Método que permite loguearse al usuario.
+        ---
+        Returns:
+            Id de la sesion y usuario del login
+        """
 
         while not self.__auth_service.is_running():
             os.system("clear")
@@ -40,5 +52,5 @@ class LoginAppPresentacion():
             session_id, username = self.login()
         except Exception as ex:
             print(ex)
-            
+
         return session_id, username

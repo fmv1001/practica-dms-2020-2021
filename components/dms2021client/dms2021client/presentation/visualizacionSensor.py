@@ -1,5 +1,8 @@
 class sensorSTR():
     def __init__(self, sesnor1_dict:dict):
+        """ Initialization/constructor method.
+        """
+        
         self.__dict = sesnor1_dict
         return
     

@@ -1,12 +1,22 @@
+""" MenuLogInicial class module.
+"""
+
 import os
 
 class MenuLogInicial():
-    
+    """ Clase responsable de la interfaz del menu inicial
+    """
+
     def __init__(self):
-        pass
+        """ Initialization/constructor method.
+        """
 
     def menuLogInOrExit(self):
-        """Metodo inicial en el que se le da la posibilidad al usuario de logearse o salir. """
+        """Metodo inicial en el que se le da la posibilidad al usuario de logearse o salir.
+        ---
+        Returns:
+            Valor de la opcion elegida
+        """
 
         os.system("clear")
 

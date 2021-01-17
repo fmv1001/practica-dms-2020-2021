@@ -1,10 +1,22 @@
+""" MenuPrincipal class module.
+"""
+
 import os
 class MenuPrincipal():
+    """ Clase responsable de la interfaz del menu principal
+    """
 
     def __init__(self):
-        return
+        """ Initialization/constructor method.
+        """
 
     def menu(self):
+        """Metodo que trata la interfaz del menu princial con el usuario.
+        ---
+        Returns:
+            Valor de la opcion elegida
+        """
+
         os.system("clear")
         print("\x1b[1;36m" + "+-----------------------------------------------------------------------+")
         print("| MENU PRINCIPAL -->                                      appGuilleFran"+ chr(174)+"|")

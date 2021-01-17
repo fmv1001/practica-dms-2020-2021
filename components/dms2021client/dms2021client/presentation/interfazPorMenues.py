@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+""" InterfazPorMenues class module.
+"""
 
-import time, os
+import time 
+import os
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest import SensorService
@@ -15,6 +18,8 @@ from dms2021client.presentation.crearUsuarioPresentacion import CrearUsuarioPres
 from dms2021client.presentation.logoutAppPresentacion import  ExitPresentacion
 
 class InterfazPorMenues():
+    """ Clase responsable de la interfaz correspondiente a la aplicacion
+    """
 
     __session_id: str
     __username: str
@@ -23,6 +28,9 @@ class InterfazPorMenues():
     __sensor_service: SensorService
 
     def __init__(self):
+        """ Initialization/constructor method.
+        """
+
         os.system("clear")
         print("\x1b[1;35m" + "+------------------+")
         print("| ¡¡BIENVENIDO!!   |")
@@ -35,7 +43,7 @@ class InterfazPorMenues():
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
         self.__sensor1_service = SensorService(self.__cfg.get_sensor_service_host(),self.__cfg.get_sensor_service_port())
         self.__sensor2_service = SensorService(self.__cfg.get_sensor2_service_host(),self.__cfg.get_sensor2_service_port())
-        
+
         salir:int = 0
         while True:
             if salir != 1:
