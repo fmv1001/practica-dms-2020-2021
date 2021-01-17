@@ -56,6 +56,7 @@ This service exposes a REST API so other services/applications can interact with
     - `200 OK` if the sensor was updated successfully. The response content (`str`) is a string containing the new sensor value.
 
 - `/actualizarreglas/<string:tipo_sensor>/reglas/<string:regla>` [`POST`]
+
   Sensor value update.
   - Parameters:
     - `tipo_sensor` [path] (`str`): The sensor type.
